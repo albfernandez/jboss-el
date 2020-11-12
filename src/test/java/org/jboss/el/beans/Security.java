@@ -9,8 +9,6 @@
 
 package org.jboss.el.beans;
 
-import java.util.Arrays;
-
 /**
  *
  * @author jhook
@@ -19,20 +17,18 @@ public class Security {
     
     /** Creates a new instance of Security */
     public Security() {
+    	super();
     }
     
     public static final boolean hasRole(Object in, String... match) {
-        System.out.println(Arrays.toString(match));
         return true;
     }
     
     public static final boolean hasOneRole(String s) {
-    	System.out.println(s);
     	return true;
     }
     
     public boolean matchRole(String... match) {
-        System.out.println(Arrays.toString(match));
         return true;
     }
 }

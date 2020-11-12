@@ -35,7 +35,6 @@ public class ReferenceMapTestCase {
         public int hashCode() { return this.id; }
 
 		protected void finalize() throws Throwable {
-			//System.out.println("Finalizing: " + this);
 			super.finalize();
 		}
         
@@ -51,9 +50,12 @@ public class ReferenceMapTestCase {
         }
 
 		protected void finalize() throws Throwable {
-			//System.out.println("Finalizing: " + this);
 			super.finalize();
 		}
+    }
+    
+    public ReferenceMapTestCase() {
+    	super();
     }
     
     @Test
@@ -61,14 +63,10 @@ public class ReferenceMapTestCase {
         
         ReferenceCache<Foo,Bar> map = new ReferenceCache<Foo,Bar>(ReferenceCache.Type.Weak, ReferenceCache.Type.Weak) {
             protected Bar create(Foo key) {
-                //System.out.println("Create called: " + key);
-                //throw new UnsupportedOperationException();
-                //return new Bar(key.id);
             	return null;
             }
         };
         
-        //map = new HashMap<Foo,Bar>();
         
         Collection<Foo> keys = new ArrayList<Foo>();
         for (int i = 0; i < 1000; i++) {
@@ -79,7 +77,6 @@ public class ReferenceMapTestCase {
             map.put(f, new Bar(f.id));
         }
         
-        System.out.println("\n----------------\n" + map.size() + "\n-----------------------------\n");
         
         for (Foo f : keys) {
             Assert.assertNotNull("Key not null " + f, map.get(f));
@@ -89,10 +86,10 @@ public class ReferenceMapTestCase {
         keys.clear();
         keys = null;
         
-        System.gc();
+        
+        // Force to GC to reclaim objects
         System.gc();
         
-        System.out.println(map.size());
         
         keys = new ArrayList<Foo>();
         for (int i = 0; i < 1000; i++) {

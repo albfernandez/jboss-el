@@ -103,7 +103,7 @@ public final class ValueExpressionImpl extends ValueExpression implements
     private transient Node node;
 
     public ValueExpressionImpl() {
-
+    	super();
     }
 
     /**
@@ -115,6 +115,7 @@ public final class ValueExpressionImpl extends ValueExpression implements
      */
     public ValueExpressionImpl(String expr, Node node, FunctionMapper fnMapper,
             VariableMapper varMapper, Class<?> expectedType) {
+    	super();
         this.expr = expr;
         this.node = node;
         this.fnMapper = fnMapper;

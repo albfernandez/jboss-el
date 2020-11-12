@@ -24,13 +24,27 @@ import java.util.concurrent.FutureTask;
  * @author jhook
  */
 public abstract class ReferenceCache<K,V> {
-
+    private final ConcurrentMap<ReferenceKey<K>,Future<ReferenceValue<V>>> cache;
+    private final ReferenceFactory keyFactory;
+    private final ReferenceFactory valueFactory;
+    private final ReferenceFactory lookupFactory;
+    private final ReferenceQueueRunner queue;
+    private Thread queueMonitor;
+    
+    public static enum Type { Strong, Weak, Soft };
+    
     public abstract class ReferenceFactory<K,V> {
+    	public ReferenceFactory() {
+    		super();
+    	}
         public abstract ReferenceKey<K> createKey(ReferenceQueue queue, K key);
         public abstract ReferenceValue<V> createValue(ReferenceQueue queue, V value);
     }
     
     private class StrongReferenceFactory extends ReferenceFactory<K,V> {
+    	public StrongReferenceFactory() {
+    		super();
+    	}
         public ReferenceValue<V> createValue(ReferenceQueue queue, final V value) {
             return new ReferenceValue<V>() {
                 public V get() {
@@ -49,6 +63,9 @@ public abstract class ReferenceCache<K,V> {
     }
     
     private class WeakReferenceFactory extends ReferenceFactory<K,V> {
+    	public WeakReferenceFactory() {
+    		super();
+    	}
     	private class WeakReferenceKey extends ReferenceKey<K> {
     		private final WeakReference<K> ref;
     		
@@ -82,6 +99,9 @@ public abstract class ReferenceCache<K,V> {
     }
     
     private class SoftReferenceFactory extends ReferenceFactory<K,V> {
+    	public SoftReferenceFactory() {
+    		super();
+    	}
     	private class SoftReferenceKey extends ReferenceKey<K> {
     		private final SoftReference<K> ref;
     		
@@ -115,19 +135,23 @@ public abstract class ReferenceCache<K,V> {
     }
     
     public abstract class ReferenceKey<K> {
-        private final int hashCode;
+        private final int hash;
         
         public ReferenceKey(K key) {
-            this.hashCode = key.hashCode();
+            this.hash = key.hashCode();
         }
         
         protected abstract K get();
         
         public boolean equals(Object obj) {
-        	if (this == obj) return true;
+        	if (this == obj) {
+        		return true;
+        	}
             K me = this.get();
             if (me != null) {
-                if (obj == me) return true;
+                if (obj == me) {
+                	return true;
+                }
                 if (obj instanceof ReferenceKey) {
                     K them = ((ReferenceKey<K>) obj).get();
                     return me == them || me.equals(them);
@@ -141,7 +165,7 @@ public abstract class ReferenceCache<K,V> {
         }
         
         public int hashCode() {
-            return this.hashCode;
+            return this.hash;
         }
     }
     
@@ -149,34 +173,27 @@ public abstract class ReferenceCache<K,V> {
         public V get();
     }
 
-    private class ReferenceQueueRunner 
-        extends ReferenceQueue 
-        implements Runnable
-    {
-        public void run() {            
-            while (true) {
-                try {
-                    Reference ref = this.remove();
-                    if (ref != null) {
-                        ref.clear();
-                    }
-                } catch (InterruptedException e) {
-                    break;
-                    //e.printStackTrace();
-                }
-            }
-        }
-    }
+	private class ReferenceQueueRunner extends ReferenceQueue implements Runnable {
+		public ReferenceQueueRunner() {
+			super();
+		}
 
-    private final ConcurrentMap<ReferenceKey<K>,Future<ReferenceValue<V>>> cache;
-    private final ReferenceFactory keyFactory;
-    private final ReferenceFactory valueFactory;
-    private final ReferenceFactory lookupFactory;
-    private final ReferenceQueueRunner queue;
-    private Thread queueMonitor;
-    
-    public static enum Type { Strong, Weak, Soft };
-    
+		public void run() {
+			while (true) {
+				try {
+					Reference ref = this.remove();
+					if (ref != null) {
+						ref.clear();
+					}
+				} catch (InterruptedException e) {
+					break;
+					//e.printStackTrace();
+				}
+			}
+		}
+	}
+
+
     /**
      * Creates a new instance of ReferenceMap
      *
@@ -261,7 +278,9 @@ public abstract class ReferenceCache<K,V> {
                 return value;
             }
         } catch (Exception e) {
-            if (e instanceof RuntimeException) throw (RuntimeException) e;
+            if (e instanceof RuntimeException) {
+            	throw (RuntimeException) e;
+            }
             throw new IllegalStateException(e);
         }
     }

@@ -51,6 +51,7 @@ public final class ReflectionUtil {
     byte.class, char.class, double.class, float.class, int.class,
     long.class, short.class, Void.TYPE };
     
+    private static final Class[] NO_TYPES = new Class[0];
     
     private static ReferenceCache<Class, MethodCache> methodCache = new ReferenceCache<Class, MethodCache>(ReferenceCache.Type.Weak, ReferenceCache.Type.Soft) {
         public MethodCache create(Class key) {
@@ -191,8 +192,12 @@ public final class ReflectionUtil {
         
         public Method findMethod(String name, Object[] in) {
             Object o = this.cache.get(name);
-            if (o == null) return null;
-            if (o instanceof Method) return (Method) o;
+            if (o == null) {
+            	return null;
+            }
+            if (o instanceof Method) {
+            	return (Method) o;
+            }
             Method r = null;
             Class[] types = paramTypes(in);
             for (Method m : (List<Method>) o) {
@@ -209,7 +214,7 @@ public final class ReflectionUtil {
     }
     
     public static Method findMethod(Object base, Object name, Object[] params) {
-        Method r = null;
+        Method r;
         if (base != null && name != null) {
             Class type = base.getClass();
             String methodName = ELSupport.coerceToString(name);
@@ -253,15 +258,13 @@ public final class ReflectionUtil {
         String methodName = (property instanceof String) ? (String) property
                 : property.toString();
         
-        Method method = null;
         try {
-            method = base.getClass().getMethod(methodName, paramTypes);
+            return base.getClass().getMethod(methodName, paramTypes);
         } catch (NoSuchMethodException nsme) {
             throw new MethodNotFoundException(MessageFactory.get(
                     "error.method.notfound", base, property,
-                    paramString(paramTypes)));
+                    paramString(paramTypes)), nsme);
         }
-        return method;
     }
     
     public static MethodInfo getMethodInfo(Object base, Object property,
@@ -285,7 +288,9 @@ public final class ReflectionUtil {
 
     
     public static Object invokeMethod(Object base, Method m, Object[] paramValues) throws ELException {
-        if (m == null) throw new MethodNotFoundException();
+        if (m == null) {
+        	throw new MethodNotFoundException();
+        }
         
         Class[] paramTypes = m.getParameterTypes();
         Object[] params = null;
@@ -338,7 +343,7 @@ public final class ReflectionUtil {
         } catch (IllegalAccessException iae) {
             throw new ELException(iae);
         } catch (InvocationTargetException ite) {
-            throw new ELException(ite.getCause());
+            throw new ELException(ite);
         }
         
     }
@@ -368,7 +373,7 @@ public final class ReflectionUtil {
         return null;
     }
     
-    private static Class[] NO_TYPES = new Class[0];
+
     
     protected static final Class[] paramTypes(Object[] ar) {
         if (ar != null) {

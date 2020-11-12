@@ -29,7 +29,7 @@ public final class AstNegative extends SimpleNode {
         Object obj = this.children[0].getValue(ctx);
 
         if (obj == null) {
-            return new Long(0);
+            return Long.valueOf(0);
         }
         if (obj instanceof BigDecimal) {
             return ((BigDecimal) obj).negate();
@@ -41,28 +41,28 @@ public final class AstNegative extends SimpleNode {
             if (isStringFloat((String) obj)) {
                 return new Double(-Double.parseDouble((String) obj));
             }
-            return new Long(-Long.parseLong((String) obj));
+            return Long.valueOf(-Long.parseLong((String) obj));
         }
         Class type = obj.getClass();
         if (obj instanceof Long || Long.TYPE == type) {
-            return new Long(-((Long) obj).longValue());
+            return Long.valueOf(-((Long) obj).longValue());
         }
         if (obj instanceof Double || Double.TYPE == type) {
             return new Double(-((Double) obj).doubleValue());
         }
         if (obj instanceof Integer || Integer.TYPE == type) {
-            return new Integer(-((Integer) obj).intValue());
+            return Integer.valueOf(-((Integer) obj).intValue());
         }
         if (obj instanceof Float || Float.TYPE == type) {
             return new Float(-((Float) obj).floatValue());
         }
         if (obj instanceof Short || Short.TYPE == type) {
-            return new Short((short) -((Short) obj).shortValue());
+            return Short.valueOf((short) -((Short) obj).shortValue());
         }
         if (obj instanceof Byte || Byte.TYPE == type) {
-            return new Byte((byte) -((Byte) obj).byteValue());
+            return Byte.valueOf((byte) -((Byte) obj).byteValue());
         }
         Long num = (Long) coerceToNumber(obj, Long.class);
-        return new Long(-num.longValue());
+        return Long.valueOf(-num.longValue());
     }
 }

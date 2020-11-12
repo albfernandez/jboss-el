@@ -21,8 +21,8 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.el.ValueExpression;
 import javax.el.VariableMapper;
@@ -31,19 +31,18 @@ public class VariableMapperImpl extends VariableMapper implements Externalizable
 
     private static final long serialVersionUID = 1L;
     
-    private Map<String, ValueExpression> vars = new HashMap<String, ValueExpression>();
+    private Map<String, ValueExpression> vars = new ConcurrentHashMap<String, ValueExpression>();
     
     public VariableMapperImpl() {
         super();
     }
 
     public ValueExpression resolveVariable(String variable) {
-        return (ValueExpression) this.vars.get(variable);
+        return this.vars.get(variable);
     }
 
-    public ValueExpression setVariable(String variable,
-            ValueExpression expression) {
-        return (ValueExpression) this.vars.put(variable, expression);
+    public ValueExpression setVariable(String variable, ValueExpression expression) {
+        return this.vars.put(variable, expression);
     }
 
     @SuppressWarnings("unchecked")

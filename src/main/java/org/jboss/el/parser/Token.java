@@ -50,13 +50,15 @@ public class Token {
    */
   public Token specialToken;
 
+  public Token() {
+	  super();
+  }
   /**
    * Returns the image.
    */
-  public String toString()
-  {
-     return image;
-  }
+	public String toString() {
+		return image;
+	}
 
   /**
    * Returns a new Token object, by default. However, if you want, you
@@ -72,12 +74,8 @@ public class Token {
    * @param ofKind the kind of token
    * @return the new token
    */
-  public static final Token newToken(int ofKind)
-  {
-     switch(ofKind)
-     {
-       default : return new Token();
-     }
-  }
+	public static final Token newToken(int ofKind) {
+		return new Token();
+	}
 
 }

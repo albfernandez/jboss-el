@@ -14,11 +14,12 @@ import org.jboss.el.lang.EvaluationContext;
  * @version $Change: 181177 $$DateTime: 2001/06/26 08:45:09 $$Author: markt $
  */
 public final class AstFloatingPoint extends SimpleNode {
+	
+    private Number number;
+    
     public AstFloatingPoint(int id) {
         super(id);
     }
-
-    private Number number;
 
     public Number getFloatingPoint() {
         if (this.number == null) {

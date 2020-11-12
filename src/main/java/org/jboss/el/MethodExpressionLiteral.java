@@ -40,10 +40,11 @@ public class MethodExpressionLiteral extends MethodExpression implements Externa
     private Class<?>[] paramTypes;
     
     public MethodExpressionLiteral() {
-        // do nothing
+    	super();
     }
     
     public MethodExpressionLiteral(String expr, Class<?> expectedType, Class<?>[] paramTypes) {
+    	super();
         this.expr = expr;
         this.expectedType = expectedType;
         this.paramTypes = paramTypes;

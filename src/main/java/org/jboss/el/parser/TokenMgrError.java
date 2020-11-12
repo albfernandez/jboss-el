@@ -92,7 +92,7 @@ public class TokenMgrError extends Error
     *
     * Note: You can customize the lexical error message by modifying this method.
     *
-    * @param EOFSeen indicates if EOF caused the lexicl error
+    * @param eofSeen indicates if EOF caused the lexicl error
     * @param lexState lexical state in which this error occured
     * @param errorLine line number when the error occured
     * @param errorColumn column number when the error occured
@@ -100,11 +100,11 @@ public class TokenMgrError extends Error
     * @param curChar the offending character
     * @return the populated error message
     */
-   protected static String LexicalError(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, char curChar) {
+   protected static String LexicalError(boolean eofSeen, int lexState, int errorLine, int errorColumn, String errorAfter, char curChar) {
       return("Lexical error at line " +
            errorLine + ", column " +
            errorColumn + ".  Encountered: " +
-           (EOFSeen ? "<EOF> " : ("\"" + addEscapes(String.valueOf(curChar)) + "\"") + " (" + (int)curChar + "), ") +
+           (eofSeen ? "<EOF> " : ("\"" + addEscapes(String.valueOf(curChar)) + "\"") + " (" + (int)curChar + "), ") +
            "after : \"" + addEscapes(errorAfter) + "\"");
    }
 
@@ -127,6 +127,7 @@ public class TokenMgrError extends Error
     */
 
    public TokenMgrError() {
+	   super();
    }
 
    public TokenMgrError(String message, int reason) {
@@ -134,7 +135,7 @@ public class TokenMgrError extends Error
       errorCode = reason;
    }
 
-   public TokenMgrError(boolean EOFSeen, int lexState, int errorLine, int errorColumn, String errorAfter, char curChar, int reason) {
-      this(LexicalError(EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar), reason);
+   public TokenMgrError(boolean eofSeen, int lexState, int errorLine, int errorColumn, String errorAfter, char curChar, int reason) {
+      this(LexicalError(eofSeen, lexState, errorLine, errorColumn, errorAfter, curChar), reason);
    }
 }

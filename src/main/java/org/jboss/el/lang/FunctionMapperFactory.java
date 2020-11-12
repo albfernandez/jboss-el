@@ -31,6 +31,7 @@ public class FunctionMapperFactory extends ExtendedFunctionMapper {
     protected FunctionMapper target;
     
     public FunctionMapperFactory(FunctionMapper mapper) {
+    	super();
         if (mapper == null) {
             throw new NullPointerException("FunctionMapper target cannot be null");
         }

@@ -32,15 +32,15 @@ import org.jboss.el.util.ReflectionUtil;
  * @author Jacob Hookom [jacob@hookom.net]
  * @version $Change: 181177 $$DateTime: 2001/06/26 08:45:09 $$Author: markt $
  */
-public class FunctionMapperImpl 
-    extends ExtendedFunctionMapper 
-    implements Externalizable 
-{
+public class FunctionMapperImpl extends ExtendedFunctionMapper implements Externalizable {
 
     private static final long serialVersionUID = 1L;
     
     protected Map<String,Function> functions = null;
 
+    public FunctionMapperImpl() {
+    	super();
+    }
     /*
      * (non-Javadoc)
      * 
@@ -49,7 +49,7 @@ public class FunctionMapperImpl
      */
     public Method resolveFunction(String prefix, String localName) {
         if (this.functions != null) {
-            Function f = (Function) this.functions.get(prefix + ":" + localName);
+            Function f = this.functions.get(prefix + ":" + localName);
             return f != null ? f.getMethod() : null;
         }
         return null;
@@ -146,7 +146,9 @@ public class FunctionMapperImpl
                 ClassNotFoundException {
             
             this.prefix = in.readUTF();
-            if ("".equals(this.prefix)) this.prefix = null;
+            if ("".equals(this.prefix)) {
+            	this.prefix = null;
+            }
             this.localName = in.readUTF();
             this.owner = in.readUTF();
             this.name = in.readUTF();
@@ -168,8 +170,12 @@ public class FunctionMapperImpl
         
         public boolean matches(String prefix, String localName) {
             if (this.prefix != null) {
-                if (prefix == null) return false;
-                if (!this.prefix.equals(prefix)) return false;
+                if (prefix == null) {
+                	return false;
+                }
+                if (!this.prefix.equals(prefix)) {
+                	return false;
+                }
             }
             return this.localName.equals(localName);
         }

@@ -94,6 +94,7 @@ public final class AstClosure extends ValueSuffixNode {
         private final VariableMapper orig;
         
         public ClosureVariableMapper(VariableMapper map, String var, Object value) {
+        	super();
             this.orig = map;
             this.var = var;
             this.value = new ValueExpressionLiteral(value, Object.class);

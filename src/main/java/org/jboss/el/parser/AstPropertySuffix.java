@@ -31,7 +31,9 @@ public final class AstPropertySuffix extends ValueSuffixNode {
 
 	public Object getTarget(Object base, EvaluationContext ctx)
 			throws ELException {
-		if (base == null) return null;
+		if (base == null) {
+			return null;
+		}
 		ELResolver resolver = ctx.getELResolver();
 		ctx.setPropertyResolved(false);
 		Object r = resolver.getValue(ctx, base, this.image);
@@ -45,8 +47,9 @@ public final class AstPropertySuffix extends ValueSuffixNode {
 
 	public Object getValue(Object base, EvaluationContext ctx)
 			throws ELException {
-		if (base == null)
+		if (base == null) {
 			return null;
+		}
 		ELResolver resolver = ctx.getELResolver();
 		ctx.setPropertyResolved(false);
 		return resolver.getValue(ctx, base, this.image);

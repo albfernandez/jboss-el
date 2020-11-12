@@ -25,13 +25,16 @@ public abstract class SimpleNode extends ELSupport implements Node {
     protected String image;
 
     public SimpleNode(int i) {
+    	super();
         id = i;
     }
 
     public void jjtOpen() {
+    	//
     }
 
     public void jjtClose() {
+    	//
     }
 
     public void jjtSetParent(Node n) {

@@ -26,6 +26,7 @@ public class VariableMapperFactory extends VariableMapper {
     private VariableMapper momento;
     
     public VariableMapperFactory(VariableMapper target) {
+    	super();
         if (target == null) {
             throw new NullPointerException("Target VariableMapper cannot be null");
         }

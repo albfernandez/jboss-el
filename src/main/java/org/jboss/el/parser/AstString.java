@@ -12,11 +12,11 @@ import org.jboss.el.lang.EvaluationContext;
  * @version $Change: 181177 $$DateTime: 2001/06/26 08:45:09 $$Author: markt $
  */
 public final class AstString extends SimpleNode {
-    public AstString(int id) {
-        super(id);
-    }
+	private String string;
 
-    private String string;
+	public AstString(int id) {
+		super(id);
+	}
 
     public String getString() {
         if (this.string == null) {

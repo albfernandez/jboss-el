@@ -20,8 +20,9 @@ public class AstMethodSuffix extends ValueSuffixNode {
 	}
 
 	private Object[] getParameters(EvaluationContext ctx) throws ELException {
-		if (this.children == null)
+		if (this.children == null) {
 			return null;
+		}
 		Object[] obj = new Object[this.children.length];
 		for (int i = 0; i < obj.length; i++) {
 			obj[i] = this.children[i].getValue(ctx);

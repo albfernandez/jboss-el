@@ -37,7 +37,7 @@ import org.jboss.el.util.MessageFactory;
 public class ELSupport {
     // private final static ELSupport REF = new ELSupport();
 
-    private final static Long ZERO = new Long(0L);
+    private final static Long ZERO = Long.valueOf(0L);
 
     public final static void throwUnhandled(Object base, Object property)
             throws ELException {
@@ -216,16 +216,17 @@ public class ELSupport {
 
     protected final static Number coerceToNumber(final Number number,
             final Class<?> type) throws IllegalArgumentException {
-    	 if (type.isInstance(number))
+    	 if (type.isInstance(number)) {
     		return number;
+    	 }
         if (Long.TYPE == type || Long.class.equals(type)) {
-            return new Long(number.longValue());
+            return Long.valueOf(number.longValue());
         }
         if (Double.TYPE == type || Double.class.equals(type)) {
             return new Double(number.doubleValue());
         }
         if (Integer.TYPE == type || Integer.class.equals(type)) {
-            return new Integer(number.intValue());
+            return Integer.valueOf(number.intValue());
         }
         if (BigInteger.class.equals(type)) {
             if (number instanceof BigDecimal) {
@@ -240,10 +241,10 @@ public class ELSupport {
             return new BigDecimal(number.doubleValue());
         }
         if (Byte.TYPE == type || Byte.class.equals(type)) {
-            return new Byte(number.byteValue());
+            return Byte.valueOf(number.byteValue());
         }
         if (Short.TYPE == type || Short.class.equals(type)) {
-            return new Short(number.shortValue());
+            return Short.valueOf(number.shortValue());
         }
         if (Float.TYPE == type || Float.class.equals(type)) {
             return new Float(number.floatValue());
@@ -273,7 +274,7 @@ public class ELSupport {
 
         Class<?> objType = obj.getClass();
         if (Character.class.equals(objType) || Character.TYPE == objType) {
-            return coerceToNumber(new Short((short) ((Character) obj)
+            return coerceToNumber(Short.valueOf((short) ((Character) obj)
                     .charValue()), type);
         }
 
@@ -359,11 +360,13 @@ public class ELSupport {
         }
 
         // new to spec
-        if (obj == null)
+        if (obj == null) {
             return null;
+        }
         if (obj instanceof String) {
-            if ("".equals(obj))
+            if ("".equals(obj)) {
                 return null;
+            }
             PropertyEditor editor = PropertyEditorManager.findEditor(type);
             if (editor != null) {
                 editor.setAsText((String) obj);
@@ -447,6 +450,7 @@ public class ELSupport {
                     return true;
                 case '.':
                     return true;
+                default: //nop
                 }
             }
         }
@@ -467,10 +471,10 @@ public class ELSupport {
 
     public final static Number toNumber(final String value) {
         try {
-            return new Integer(Integer.parseInt(value));
+            return Integer.valueOf(value);
         } catch (NumberFormatException e0) {
             try {
-                return new Long(Long.parseLong(value));
+                return Long.valueOf(value);
             } catch (NumberFormatException e1) {
                 return new BigInteger(value);
             }

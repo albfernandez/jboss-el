@@ -14,16 +14,17 @@ import org.jboss.el.lang.EvaluationContext;
  * @version $Change: 181177 $$DateTime: 2001/06/26 08:45:09 $$Author: markt $
  */
 public final class AstInteger extends SimpleNode {
+	
+	private Number number;
+	
     public AstInteger(int id) {
         super(id);
     }
 
-    private Number number;
-
     protected Number getInteger() {
         if (this.number == null) {
             try {
-                this.number = new Long(this.image);
+                this.number = Long.valueOf(this.image);
             } catch (ArithmeticException e1) {
                 this.number = new BigInteger(this.image);
             }

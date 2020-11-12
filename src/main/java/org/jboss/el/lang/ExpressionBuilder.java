@@ -108,8 +108,7 @@ public final class ExpressionBuilder implements NodeVisitor {
 	}
 
 	public final static Node createNode(String expr) throws ELException {
-		Node n = createNodeInternal(expr);
-		return n;
+		return createNodeInternal(expr);
 	}
 
 	private final static Node createNodeInternal(String expr)
@@ -134,10 +133,12 @@ public final class ExpressionBuilder implements NodeVisitor {
 						Node child = null;
 						for (int i = 0; i < numChildren; i++) {
 							child = n.jjtGetChild(i);
-							if (child instanceof AstLiteralExpression)
+							if (child instanceof AstLiteralExpression) {
 								continue;
-							if (type == null)
+							}
+							if (type == null) {
 								type = child.getClass();
+							}
 							else {
 								if (!type.equals(child.getClass())) {
 									throw new ELException(MessageFactory.get(
@@ -195,14 +196,14 @@ public final class ExpressionBuilder implements NodeVisitor {
 	public void visit(Node node) throws ELException {
 		if (node instanceof AstFunction) {
 
-			AstFunction funcNode = (AstFunction) node;
+			
 
 			if (this.fnMapper == null) {
 				throw new ELException(MessageFactory.get("error.fnMapper.null"));
 			}
-			
 			Method m = null;
 			
+			AstFunction funcNode = (AstFunction) node;
 			if (fnMapper instanceof ExtendedFunctionMapper)
 			{
 			   m = ((ExtendedFunctionMapper) fnMapper).resolveFunction(funcNode.getPrefix(), 
