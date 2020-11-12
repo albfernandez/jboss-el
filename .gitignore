@@ -1,4 +1,9 @@
-target
+
+
+.pmd
+
 .classpath
-.settings/
 .project
+.settings/
+target/
+
