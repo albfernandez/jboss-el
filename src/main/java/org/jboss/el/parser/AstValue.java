@@ -24,7 +24,8 @@ public final class AstValue extends SimpleNode {
         super(id);
     }
     
-    public Class getType(EvaluationContext ctx) throws ELException {
+    @Override
+	public Class getType(EvaluationContext ctx) throws ELException {
         Target t = getTarget(ctx);
         return t.node.getType(t.base, ctx);
     }
@@ -59,7 +60,8 @@ public final class AstValue extends SimpleNode {
         return t;
     }
     
-    public Object getValue(EvaluationContext ctx) throws ELException {
+    @Override
+	public Object getValue(EvaluationContext ctx) throws ELException {
         Object base = this.children[0].getValue(ctx);
         int propCount = this.jjtGetNumChildren();
         int i = 1;
@@ -73,24 +75,28 @@ public final class AstValue extends SimpleNode {
         return base;
     }
     
-    public boolean isReadOnly(EvaluationContext ctx) throws ELException {
+    @Override
+	public boolean isReadOnly(EvaluationContext ctx) throws ELException {
         Target t = getTarget(ctx);
         return t.node.isReadOnly(t.base, ctx);
     }
     
-    public void setValue(EvaluationContext ctx, Object value)
+    @Override
+	public void setValue(EvaluationContext ctx, Object value)
     throws ELException {
         Target t = getTarget(ctx);
         t.node.setValue(t.base, ctx, value);
     }
     
-    public MethodInfo getMethodInfo(EvaluationContext ctx, Class[] paramTypes)
+    @Override
+	public MethodInfo getMethodInfo(EvaluationContext ctx, Class[] paramTypes)
     throws ELException {
         Target t = getTarget(ctx);
         return t.node.getMethodInfo(t.base, ctx, paramTypes);
     }
     
-    public Object invoke(EvaluationContext ctx, Class[] paramTypes,
+    @Override
+	public Object invoke(EvaluationContext ctx, Class[] paramTypes,
             Object[] paramValues) throws ELException {
         Target t = getTarget(ctx);
         return t.node.invoke(t.base, ctx, paramTypes, paramValues);

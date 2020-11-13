@@ -25,17 +25,20 @@ public final class AstString extends SimpleNode {
         return this.string;
     }
 
-    public Class getType(EvaluationContext ctx)
+    @Override
+	public Class getType(EvaluationContext ctx)
             throws ELException {
         return String.class;
     }
 
-    public Object getValue(EvaluationContext ctx)
+    @Override
+	public Object getValue(EvaluationContext ctx)
             throws ELException {
         return this.getString();
     }
 
-    public void setImage(String image) {
+    @Override
+	public void setImage(String image) {
         if (image.indexOf('\\') == -1) {
             this.image = image;
             return;

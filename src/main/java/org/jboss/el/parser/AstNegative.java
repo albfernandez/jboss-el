@@ -19,12 +19,14 @@ public final class AstNegative extends SimpleNode {
         super(id);
     }
 
-    public Class getType(EvaluationContext ctx)
+    @Override
+	public Class getType(EvaluationContext ctx)
             throws ELException {
         return Number.class;
     }
 
-    public Object getValue(EvaluationContext ctx)
+    @Override
+	public Object getValue(EvaluationContext ctx)
             throws ELException {
         Object obj = this.children[0].getValue(ctx);
 

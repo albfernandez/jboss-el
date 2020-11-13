@@ -30,11 +30,13 @@ public class AstMethodSuffix extends ValueSuffixNode {
 		return obj;
 	}
 
+	@Override
 	public MethodInfo getMethodInfo(Object base, EvaluationContext ctx,
 			Class[] paramTypes) throws ELException {
 		return ReflectionUtil.getMethodInfo(base, this.image, this.getParameters(ctx));
 	}
 
+	@Override
 	public Object getTarget(Object base, EvaluationContext ctx)
 			throws ELException {
 		Object r = ReflectionUtil.invokeMethod(base, this.image, this
@@ -49,28 +51,33 @@ public class AstMethodSuffix extends ValueSuffixNode {
 		return r;
 	}
 
+	@Override
 	public Class getType(Object base, EvaluationContext ctx) throws ELException {
 		Method m = ReflectionUtil.findMethod(base, this.image, this
 				.getParameters(ctx));
 		return m.getReturnType();
 	}
 
+	@Override
 	public Object getValue(Object base, EvaluationContext ctx)
 			throws ELException {
 		return ReflectionUtil.invokeMethod(base, this.image, this
 				.getParameters(ctx));
 	}
 
+	@Override
 	public Object invoke(Object base, EvaluationContext ctx,
 			Class[] paramTypes, Object[] paramValues) throws ELException {
 		return this.getValue(base, ctx);
 	}
 
+	@Override
 	public boolean isReadOnly(Object base, EvaluationContext ctx)
 			throws ELException {
 		return true;
 	}
 
+	@Override
 	public void setValue(Object base, EvaluationContext ctx, Object value)
 			throws ELException {
 		throw new PropertyNotWritableException(MessageFactory

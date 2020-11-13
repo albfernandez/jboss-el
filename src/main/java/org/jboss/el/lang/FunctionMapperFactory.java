@@ -42,7 +42,8 @@ public class FunctionMapperFactory extends ExtendedFunctionMapper {
     /* (non-Javadoc)
      * @see javax.el.FunctionMapper#resolveFunction(java.lang.String, java.lang.String)
      */
-    public Method resolveFunction(String prefix, String localName) {
+    @Override
+	public Method resolveFunction(String prefix, String localName) {
         if (this.memento == null) {
             this.memento = new FunctionMapperImpl();
         }
@@ -53,7 +54,8 @@ public class FunctionMapperFactory extends ExtendedFunctionMapper {
         return m;
     }
     
-    public Method resolveFunction(String prefix, String localName, int paramCount) {
+    @Override
+	public Method resolveFunction(String prefix, String localName, int paramCount) {
        if (this.memento == null) {
            this.memento = new FunctionMapperImpl();
        }

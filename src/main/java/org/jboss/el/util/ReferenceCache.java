@@ -45,17 +45,21 @@ public abstract class ReferenceCache<K,V> {
     	public StrongReferenceFactory() {
     		super();
     	}
-        public ReferenceValue<V> createValue(ReferenceQueue queue, final V value) {
+        @Override
+		public ReferenceValue<V> createValue(ReferenceQueue queue, final V value) {
             return new ReferenceValue<V>() {
-                public V get() {
+                @Override
+				public V get() {
                     return value;
                 }
             };
         }
         
-        public ReferenceKey<K> createKey(ReferenceQueue queue, final K key) {
+        @Override
+		public ReferenceKey<K> createKey(ReferenceQueue queue, final K key) {
             return new ReferenceKey<K>(key) {
-                public K get() {
+                @Override
+				public K get() {
                     return key;
                 }
             };
@@ -72,28 +76,33 @@ public abstract class ReferenceCache<K,V> {
     		public WeakReferenceKey(final ReferenceQueue queue, final K key) {
     			super(key);
     			this.ref = new WeakReference<K>(key, queue) {
-    				public void clear() {
+    				@Override
+					public void clear() {
     					remove();
     					super.clear();
     				}
     			};
     		}
     		
-    		public K get() {
+    		@Override
+			public K get() {
     			return this.ref.get();
     		}
     	}
     	
-        public ReferenceValue<V> createValue(final ReferenceQueue queue, final V value) {
+        @Override
+		public ReferenceValue<V> createValue(final ReferenceQueue queue, final V value) {
             return new ReferenceValue<V>() {
                 private final WeakReference<V> ref = new WeakReference<V>(value, queue);
-                public V get() {
+                @Override
+				public V get() {
                     return ref.get();
                 }
             };
         }
         
-        public ReferenceKey<K> createKey(ReferenceQueue queue, K key) {
+        @Override
+		public ReferenceKey<K> createKey(ReferenceQueue queue, K key) {
             return new WeakReferenceKey(queue, key);
         }
     }
@@ -108,28 +117,33 @@ public abstract class ReferenceCache<K,V> {
     		public SoftReferenceKey(final ReferenceQueue queue, final K key) {
     			super(key);
     			this.ref = new SoftReference<K>(key, queue) {
-    				public void clear() {
+    				@Override
+					public void clear() {
     					remove();
     					super.clear();
     				}
     			};
     		}
     		
-    		public K get() {
+    		@Override
+			public K get() {
     			return this.ref.get();
     		}
     	}
     	
-    	public ReferenceValue<V> createValue(final ReferenceQueue queue, final V value) {
+    	@Override
+		public ReferenceValue<V> createValue(final ReferenceQueue queue, final V value) {
             return new ReferenceValue<V>() {
                 private final SoftReference<V> ref = new SoftReference<V>(value, queue);
-                public V get() {
+                @Override
+				public V get() {
                     return ref.get();
                 }
             };
         }
         
-        public ReferenceKey<K> createKey(final ReferenceQueue queue, final K key) {
+        @Override
+		public ReferenceKey<K> createKey(final ReferenceQueue queue, final K key) {
             return new SoftReferenceKey(queue, key);
         }
     }
@@ -143,7 +157,8 @@ public abstract class ReferenceCache<K,V> {
         
         protected abstract K get();
         
-        public boolean equals(Object obj) {
+        @Override
+		public boolean equals(Object obj) {
         	if (this == obj) {
         		return true;
         	}
@@ -164,7 +179,8 @@ public abstract class ReferenceCache<K,V> {
         	cache.remove(this);
         }
         
-        public int hashCode() {
+        @Override
+		public int hashCode() {
             return this.hash;
         }
     }
@@ -178,6 +194,7 @@ public abstract class ReferenceCache<K,V> {
 			super();
 		}
 
+		@Override
 		public void run() {
 			while (true) {
 				try {
@@ -246,14 +263,15 @@ public abstract class ReferenceCache<K,V> {
     
     public V get(final Object key) {
         try {
-            ReferenceKey<K> refKey = this.lookupFactory.createKey(this.queue, (K) key);
+            ReferenceKey<K> refKey = this.lookupFactory.createKey(this.queue, key);
             Future<ReferenceValue<V>> f = this.cache.get(refKey);
             V value = dereferenceValue(f);
             if (value != null) {
             	return value;
             } else {
                 Callable<ReferenceValue<V>> call = new Callable() {
-                    public ReferenceValue<V> call() throws Exception {
+                    @Override
+					public ReferenceValue<V> call() throws Exception {
                         V created = create((K) key);
                         if (created != null) {
                             return valueFactory.createValue(queue, created);
@@ -263,7 +281,7 @@ public abstract class ReferenceCache<K,V> {
                     }
                 };
                 FutureTask<ReferenceValue<V>> task = new FutureTask<ReferenceValue<V>>(call);
-                refKey = this.keyFactory.createKey(this.queue, (K) key);
+                refKey = this.keyFactory.createKey(this.queue, key);
                 f = this.cache.putIfAbsent(refKey, task);
                 if (f == null) {
                     f = task;
@@ -300,7 +318,8 @@ public abstract class ReferenceCache<K,V> {
     public V put(K key, final V value) {
         ReferenceKey refKey = this.keyFactory.createKey(this.queue, key);
         Callable<ReferenceValue<V>> call = new Callable() {
-            public ReferenceValue<V> call() throws Exception {
+            @Override
+			public ReferenceValue<V> call() throws Exception {
                 return valueFactory.createValue(queue, value);
             }
         };

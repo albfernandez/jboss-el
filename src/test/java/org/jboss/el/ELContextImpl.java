@@ -34,6 +34,7 @@ public class ELContextImpl extends ELContext {
 		this.fm = fm;
 	}
 	
+	@Override
 	public ELResolver getELResolver() {
 		return this.resolver;
 	}
@@ -42,10 +43,12 @@ public class ELContextImpl extends ELContext {
 		this.vars.setValue(name, value);
 	}
 
+	@Override
 	public FunctionMapper getFunctionMapper() {
 		return this.fm;
 	}
 
+	@Override
 	public VariableMapper getVariableMapper() {
 		return vm;
 	}

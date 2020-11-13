@@ -38,7 +38,8 @@ public final class Department {
         this.name = name;
     }
     
-    public String toString() {
+    @Override
+	public String toString() {
         return "Department[" + this.getName() + "]";
     }
 

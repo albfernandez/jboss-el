@@ -58,7 +58,8 @@ public final class Employee {
         this.management = management;
     }
     
-    public String toString() {
+    @Override
+	public String toString() {
         return "Employee[" + this.lastName + "," + this.firstName + "]";
     }
 

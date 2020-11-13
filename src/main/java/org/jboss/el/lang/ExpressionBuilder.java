@@ -64,7 +64,8 @@ public final class ExpressionBuilder implements NodeVisitor {
         } else {
             CACHE_SIZE = AccessController.doPrivileged(
                     new PrivilegedAction<Integer>() {
-                    	public Integer run() {
+                    	@Override
+						public Integer run() {
                         return Integer.valueOf(
                                 System.getProperty(CACHE_SIZE_PROP, "-1"));
                     }
@@ -193,6 +194,7 @@ public final class ExpressionBuilder implements NodeVisitor {
 	 * 
 	 * @see com.sun.el.parser.NodeVisitor#visit(com.sun.el.parser.Node)
 	 */
+	@Override
 	public void visit(Node node) throws ELException {
 		if (node instanceof AstFunction) {
 

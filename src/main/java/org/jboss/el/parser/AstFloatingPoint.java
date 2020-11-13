@@ -32,12 +32,14 @@ public final class AstFloatingPoint extends SimpleNode {
         return this.number;
     }
 
-    public Object getValue(EvaluationContext ctx)
+    @Override
+	public Object getValue(EvaluationContext ctx)
             throws ELException {
         return this.getFloatingPoint();
     }
 
-    public Class getType(EvaluationContext ctx)
+    @Override
+	public Class getType(EvaluationContext ctx)
             throws ELException {
         return this.getFloatingPoint().getClass();
     }

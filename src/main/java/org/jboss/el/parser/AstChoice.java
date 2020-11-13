@@ -16,13 +16,15 @@ public final class AstChoice extends SimpleNode {
         super(id);
     }
 
-    public Class getType(EvaluationContext ctx)
+    @Override
+	public Class getType(EvaluationContext ctx)
             throws ELException {
         Object val = this.getValue(ctx);
         return (val != null) ? val.getClass() : null;
     }
 
-    public Object getValue(EvaluationContext ctx)
+    @Override
+	public Object getValue(EvaluationContext ctx)
             throws ELException {
         Object obj0 = this.children[0].getValue(ctx);
         Boolean b0 = coerceToBoolean(obj0);

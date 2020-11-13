@@ -37,20 +37,24 @@ public class VariableMapperImpl extends VariableMapper implements Externalizable
         super();
     }
 
-    public ValueExpression resolveVariable(String variable) {
+    @Override
+	public ValueExpression resolveVariable(String variable) {
         return this.vars.get(variable);
     }
 
-    public ValueExpression setVariable(String variable, ValueExpression expression) {
+    @Override
+	public ValueExpression setVariable(String variable, ValueExpression expression) {
         return this.vars.put(variable, expression);
     }
 
-    @SuppressWarnings("unchecked")
+    @Override
+	@SuppressWarnings("unchecked")
 	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         this.vars = (Map<String, ValueExpression>) in.readObject();
     }
 
-    public void writeExternal(ObjectOutput out) throws IOException {
+    @Override
+	public void writeExternal(ObjectOutput out) throws IOException {
         out.writeObject(this.vars);
     }
 }

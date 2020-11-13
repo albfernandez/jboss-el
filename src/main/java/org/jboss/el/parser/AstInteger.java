@@ -32,12 +32,14 @@ public final class AstInteger extends SimpleNode {
         return number;
     }
 
-    public Class getType(EvaluationContext ctx)
+    @Override
+	public Class getType(EvaluationContext ctx)
             throws ELException {
         return this.getInteger().getClass();
     }
 
-    public Object getValue(EvaluationContext ctx)
+    @Override
+	public Object getValue(EvaluationContext ctx)
             throws ELException {
         return this.getInteger();
     }

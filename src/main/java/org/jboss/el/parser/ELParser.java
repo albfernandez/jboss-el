@@ -2001,7 +2001,7 @@ public class ELParser/*@bgen(jjtree)*/ implements ELParserTreeConstants, ELParse
 		jj_add_error_token(0, 0);
 		int[][] exptokseq = new int[jj_expentries.size()][];
 		for (int i = 0; i < jj_expentries.size(); i++) {
-			exptokseq[i] = (int[]) jj_expentries.elementAt(i);
+			exptokseq[i] = jj_expentries.elementAt(i);
 		}
 		return new ParseException(token, exptokseq, tokenImage);
 	}

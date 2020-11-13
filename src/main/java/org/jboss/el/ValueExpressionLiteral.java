@@ -51,35 +51,42 @@ public final class ValueExpressionLiteral extends ValueExpression implements
         this.expectedType = expectedType;
     }
 
-    public Object getValue(ELContext context) {
+    @Override
+	public Object getValue(ELContext context) {
         if (this.expectedType != null) {
             return ELSupport.coerceToType(this.value, this.expectedType);
         }
         return this.value;
     }
 
-    public void setValue(ELContext context, Object value) {
+    @Override
+	public void setValue(ELContext context, Object value) {
         throw new PropertyNotWritableException(MessageFactory.get(
                 "error.value.literal.write", this.value));
     }
 
-    public boolean isReadOnly(ELContext context) {
+    @Override
+	public boolean isReadOnly(ELContext context) {
         return true;
     }
 
-    public Class<?> getType(ELContext context) {
+    @Override
+	public Class<?> getType(ELContext context) {
         return (this.value != null) ? this.value.getClass() : null;
     }
 
-    public Class<?> getExpectedType() {
+    @Override
+	public Class<?> getExpectedType() {
         return this.expectedType;
     }
 
-    public String getExpressionString() {
+    @Override
+	public String getExpressionString() {
         return (this.value != null) ? this.value.toString() : null;
     }
 
-    public boolean equals(Object obj) {
+    @Override
+	public boolean equals(Object obj) {
         return (obj instanceof ValueExpressionLiteral && this
                 .equals((ValueExpressionLiteral) obj));
     }
@@ -89,21 +96,25 @@ public final class ValueExpressionLiteral extends ValueExpression implements
                 .equals(ve.value))));
     }
 
-    public int hashCode() {
+    @Override
+	public int hashCode() {
         return (this.value != null) ? this.value.hashCode() : 0;
     }
 
-    public boolean isLiteralText() {
+    @Override
+	public boolean isLiteralText() {
         return true;
     }
 
-    public void writeExternal(ObjectOutput out) throws IOException {
+    @Override
+	public void writeExternal(ObjectOutput out) throws IOException {
         out.writeObject(this.value);
         out.writeUTF((this.expectedType != null) ? this.expectedType.getName()
                 : "");
     }
 
-    public void readExternal(ObjectInput in) throws IOException,
+    @Override
+	public void readExternal(ObjectInput in) throws IOException,
             ClassNotFoundException {
         this.value = in.readObject();
         String type = in.readUTF();

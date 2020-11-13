@@ -117,7 +117,7 @@ public class TestELSupport {
     }
     @Test
     public void coerceToTypeNullBigDecimal(){
-        assertEquals(new BigDecimal(0), (BigDecimal)ELSupport.coerceToType(null, BigDecimal.class));
+        assertEquals(new BigDecimal(0), ELSupport.coerceToType(null, BigDecimal.class));
     }
     @Test
     public void coerceToTypeNullString(){

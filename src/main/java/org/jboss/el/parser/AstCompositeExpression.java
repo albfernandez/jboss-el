@@ -17,12 +17,14 @@ public final class AstCompositeExpression extends SimpleNode {
         super(id);
     }
 
-    public Class getType(EvaluationContext ctx)
+    @Override
+	public Class getType(EvaluationContext ctx)
             throws ELException {
         return String.class;
     }
 
-    public Object getValue(EvaluationContext ctx)
+    @Override
+	public Object getValue(EvaluationContext ctx)
             throws ELException {
         StringBuffer sb = new StringBuffer(16);
         Object obj = null;

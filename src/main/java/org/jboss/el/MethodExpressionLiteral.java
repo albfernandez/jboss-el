@@ -50,11 +50,13 @@ public class MethodExpressionLiteral extends MethodExpression implements Externa
         this.paramTypes = paramTypes;
     }
 
-    public MethodInfo getMethodInfo(ELContext context) throws ELException {
+    @Override
+	public MethodInfo getMethodInfo(ELContext context) throws ELException {
         return new MethodInfo(this.expr, this.expectedType, this.paramTypes);
     }
 
-    public Object invoke(ELContext context, Object[] params) throws ELException {
+    @Override
+	public Object invoke(ELContext context, Object[] params) throws ELException {
         if (this.expectedType != null) {
             return ELSupport.coerceToType(this.expr, this.expectedType);
         } else {
@@ -62,23 +64,28 @@ public class MethodExpressionLiteral extends MethodExpression implements Externa
         }
     }
 
-    public String getExpressionString() {
+    @Override
+	public String getExpressionString() {
         return this.expr;
     }
 
-    public boolean equals(Object obj) {
+    @Override
+	public boolean equals(Object obj) {
         return (obj instanceof MethodExpressionLiteral && this.hashCode() == obj.hashCode());
     }
 
-    public int hashCode() {
+    @Override
+	public int hashCode() {
         return this.expr.hashCode();
     }
 
-    public boolean isLiteralText() {
+    @Override
+	public boolean isLiteralText() {
         return true;
     }
 
-    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+    @Override
+	public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         this.expr = in.readUTF();
         String type = in.readUTF();
         if (!"".equals(type)) {
@@ -88,7 +95,8 @@ public class MethodExpressionLiteral extends MethodExpression implements Externa
                 .readObject()));
     }
 
-    public void writeExternal(ObjectOutput out) throws IOException {
+    @Override
+	public void writeExternal(ObjectOutput out) throws IOException {
         out.writeUTF(this.expr);
         out.writeUTF((this.expectedType != null) ? this.expectedType.getName()
                 : "");

@@ -19,23 +19,27 @@ public class VariableResolver extends ELResolver {
 		this.vars.put(name, value);
 	}
 
+	@Override
 	public Class<?> getCommonPropertyType(ELContext context, Object base) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public Iterator<FeatureDescriptor> getFeatureDescriptors(ELContext context,
 			Object base) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public Class<?> getType(ELContext context, Object base, Object property)
 			throws NullPointerException, PropertyNotFoundException, ELException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public Object getValue(ELContext context, Object base, Object property)
 			throws NullPointerException, PropertyNotFoundException, ELException {
 		if (base == null) {
@@ -45,11 +49,13 @@ public class VariableResolver extends ELResolver {
 		return null;
 	}
 
+	@Override
 	public boolean isReadOnly(ELContext context, Object base, Object property)
 			throws NullPointerException, PropertyNotFoundException, ELException {
 		return false;
 	}
 
+	@Override
 	public void setValue(ELContext context, Object base, Object property,
 			Object value) throws NullPointerException,
 			PropertyNotFoundException, PropertyNotWritableException,

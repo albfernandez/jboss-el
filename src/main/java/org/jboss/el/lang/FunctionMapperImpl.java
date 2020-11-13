@@ -47,7 +47,8 @@ public class FunctionMapperImpl extends ExtendedFunctionMapper implements Extern
      * @see javax.el.FunctionMapper#resolveFunction(java.lang.String,
      *      java.lang.String)
      */
-    public Method resolveFunction(String prefix, String localName) {
+    @Override
+	public Method resolveFunction(String prefix, String localName) {
         if (this.functions != null) {
             Function f = this.functions.get(prefix + ":" + localName);
             return f != null ? f.getMethod() : null;
@@ -55,7 +56,8 @@ public class FunctionMapperImpl extends ExtendedFunctionMapper implements Extern
         return null;
     }
     
-    public Method resolveFunction(String prefix, String localName, int paramCount) {
+    @Override
+	public Method resolveFunction(String prefix, String localName, int paramCount) {
        if (this.functions != null) {
           Function f =  this.functions.get(prefix + ":" + localName + ":" + paramCount);
           return f != null ? f.getMethod() : null;
@@ -79,7 +81,8 @@ public class FunctionMapperImpl extends ExtendedFunctionMapper implements Extern
      * 
      * @see java.io.Externalizable#writeExternal(java.io.ObjectOutput)
      */
-    public void writeExternal(ObjectOutput out) throws IOException {
+    @Override
+	public void writeExternal(ObjectOutput out) throws IOException {
         out.writeObject(this.functions);
     }
 
@@ -88,7 +91,8 @@ public class FunctionMapperImpl extends ExtendedFunctionMapper implements Extern
      * 
      * @see java.io.Externalizable#readExternal(java.io.ObjectInput)
      */
-    @SuppressWarnings("unchecked")
+    @Override
+	@SuppressWarnings("unchecked")
     public void readExternal(ObjectInput in) throws IOException,
             ClassNotFoundException {
         this.functions = (Map<String,Function>) in.readObject();
@@ -129,7 +133,8 @@ public class FunctionMapperImpl extends ExtendedFunctionMapper implements Extern
          * 
          * @see java.io.Externalizable#writeExternal(java.io.ObjectOutput)
          */
-        public void writeExternal(ObjectOutput out) throws IOException {
+        @Override
+		public void writeExternal(ObjectOutput out) throws IOException {
             out.writeUTF((this.prefix != null) ? this.prefix : "");
             out.writeUTF(this.localName);
 			out.writeUTF(this.getMethod().getDeclaringClass().getName());
@@ -142,7 +147,8 @@ public class FunctionMapperImpl extends ExtendedFunctionMapper implements Extern
          * 
          * @see java.io.Externalizable#readExternal(java.io.ObjectInput)
          */
-        public void readExternal(ObjectInput in) throws IOException,
+        @Override
+		public void readExternal(ObjectInput in) throws IOException,
                 ClassNotFoundException {
             
             this.prefix = in.readUTF();
@@ -183,7 +189,8 @@ public class FunctionMapperImpl extends ExtendedFunctionMapper implements Extern
         /* (non-Javadoc)
          * @see java.lang.Object#equals(java.lang.Object)
          */
-        public boolean equals(Object obj) {
+        @Override
+		public boolean equals(Object obj) {
             if (obj instanceof Function) {
                 return this.hashCode() == obj.hashCode();
             }
@@ -193,7 +200,8 @@ public class FunctionMapperImpl extends ExtendedFunctionMapper implements Extern
         /* (non-Javadoc)
          * @see java.lang.Object#hashCode()
          */
-        public int hashCode() {
+        @Override
+		public int hashCode() {
             return (this.prefix + this.localName).hashCode();
         }
     }

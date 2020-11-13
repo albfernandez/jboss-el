@@ -37,7 +37,8 @@ public class VariableMapperFactory extends VariableMapper {
         return this.momento;
     }
 
-    public ValueExpression resolveVariable(String variable) {
+    @Override
+	public ValueExpression resolveVariable(String variable) {
         ValueExpression expr = this.target.resolveVariable(variable);
         if (expr != null) {
             if (this.momento == null) {
@@ -48,7 +49,8 @@ public class VariableMapperFactory extends VariableMapper {
         return expr;
     }
 
-    public ValueExpression setVariable(String variable, ValueExpression expression) {
+    @Override
+	public ValueExpression setVariable(String variable, ValueExpression expression) {
         throw new UnsupportedOperationException("Cannot Set Variables on Factory");
     }
 }

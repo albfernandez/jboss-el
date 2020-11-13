@@ -14,7 +14,8 @@ public final class AstClosure extends ValueSuffixNode {
         super(id);
     }
     
-    public boolean isReadOnly(Object base, EvaluationContext ctx) throws ELException {
+    @Override
+	public boolean isReadOnly(Object base, EvaluationContext ctx) throws ELException {
         VariableMapper orig = ctx.getVariableMapper();
         ctx.setVariableMapper(new ClosureVariableMapper(orig, this.image, base));
         boolean result = false;
@@ -26,7 +27,8 @@ public final class AstClosure extends ValueSuffixNode {
         return result;
     }
     
-    public Object getValue(Object base, EvaluationContext ctx) throws ELException {
+    @Override
+	public Object getValue(Object base, EvaluationContext ctx) throws ELException {
         VariableMapper orig = ctx.getVariableMapper();
         ctx.setVariableMapper(new ClosureVariableMapper(orig, this.image, base));
         Object result = null;
@@ -38,7 +40,8 @@ public final class AstClosure extends ValueSuffixNode {
         return result;
     }
     
-    public Class getType(Object base, EvaluationContext ctx) throws ELException {
+    @Override
+	public Class getType(Object base, EvaluationContext ctx) throws ELException {
         VariableMapper orig = ctx.getVariableMapper();
         ctx.setVariableMapper(new ClosureVariableMapper(orig, this.image, base));
         Class result = null;
@@ -50,11 +53,13 @@ public final class AstClosure extends ValueSuffixNode {
         return result;
     }
     
-    public Object getTarget(Object base, EvaluationContext ctx) throws ELException {
+    @Override
+	public Object getTarget(Object base, EvaluationContext ctx) throws ELException {
         return null;
     }
     
-    public MethodInfo getMethodInfo(Object base, EvaluationContext ctx, Class[] paramTypes) throws ELException {
+    @Override
+	public MethodInfo getMethodInfo(Object base, EvaluationContext ctx, Class[] paramTypes) throws ELException {
         VariableMapper orig = ctx.getVariableMapper();
         ctx.setVariableMapper(new ClosureVariableMapper(orig, this.image, base));
         MethodInfo result = null;
@@ -66,7 +71,8 @@ public final class AstClosure extends ValueSuffixNode {
         return result;
     }
     
-    public Object invoke(Object base, EvaluationContext ctx, Class[] paramTypes, Object[] paramValues) throws ELException {
+    @Override
+	public Object invoke(Object base, EvaluationContext ctx, Class[] paramTypes, Object[] paramValues) throws ELException {
         VariableMapper orig = ctx.getVariableMapper();
         ctx.setVariableMapper(new ClosureVariableMapper(orig, this.image, base));
         Object result = null;
@@ -78,7 +84,8 @@ public final class AstClosure extends ValueSuffixNode {
         return result;
     }
     
-    public void setValue(Object base, EvaluationContext ctx, Object value) throws ELException {
+    @Override
+	public void setValue(Object base, EvaluationContext ctx, Object value) throws ELException {
         VariableMapper orig = ctx.getVariableMapper();
         ctx.setVariableMapper(new ClosureVariableMapper(orig, this.image, base));
         try {
@@ -100,7 +107,8 @@ public final class AstClosure extends ValueSuffixNode {
             this.value = new ValueExpressionLiteral(value, Object.class);
         }
 
-        public ValueExpression resolveVariable(String variable) {
+        @Override
+		public ValueExpression resolveVariable(String variable) {
             if (this.var.equals(variable)) {
                 return this.value;
             } else if (this.orig != null) {
@@ -110,7 +118,8 @@ public final class AstClosure extends ValueSuffixNode {
             }
         }
 
-        public ValueExpression setVariable(String variable, ValueExpression expression) {
+        @Override
+		public ValueExpression setVariable(String variable, ValueExpression expression) {
             throw new UnsupportedOperationException();
         }
     }

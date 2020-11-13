@@ -42,11 +42,13 @@ public class ExpressionFactoryImpl extends ExpressionFactory {
         super();
     }
 
-    public Object coerceToType(Object obj, Class<?> type) {
+    @Override
+	public Object coerceToType(Object obj, Class<?> type) {
         return ELSupport.coerceToType(obj, type);
     }
 
-    public MethodExpression createMethodExpression(ELContext context,
+    @Override
+	public MethodExpression createMethodExpression(ELContext context,
             String expression, Class<?> expectedReturnType,
             Class<?>[] expectedParamTypes) {
         if (expectedParamTypes == null) {
@@ -58,7 +60,8 @@ public class ExpressionFactoryImpl extends ExpressionFactory {
                 expectedParamTypes);
     }
 
-    public ValueExpression createValueExpression(ELContext context,
+    @Override
+	public ValueExpression createValueExpression(ELContext context,
             String expression, Class<?> expectedType) {
         if (expectedType == null) {
             throw new NullPointerException(MessageFactory
@@ -68,7 +71,8 @@ public class ExpressionFactoryImpl extends ExpressionFactory {
         return builder.createValueExpression(expectedType);
     }
 
-    public ValueExpression createValueExpression(Object instance,
+    @Override
+	public ValueExpression createValueExpression(Object instance,
             Class<?> expectedType) {
         if (expectedType == null) {
             throw new NullPointerException(MessageFactory

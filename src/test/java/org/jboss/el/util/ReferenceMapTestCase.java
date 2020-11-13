@@ -26,14 +26,18 @@ public class ReferenceMapTestCase {
         private static int uid = 0;
         public Foo() { this.id = uid++; }
         public Foo(int id) { this.id = id; }
-        public String toString() {
+        @Override
+		public String toString() {
             return "Foo[" + this.id + "]";
         }
-        public boolean equals(Object obj) {
+        @Override
+		public boolean equals(Object obj) {
             return obj instanceof Foo && ((Foo) obj).id == this.id;
         }
-        public int hashCode() { return this.id; }
+        @Override
+		public int hashCode() { return this.id; }
 
+		@Override
 		protected void finalize() throws Throwable {
 			super.finalize();
 		}
@@ -45,10 +49,12 @@ public class ReferenceMapTestCase {
         private static int uid = 0;
         public Bar() { this.id = uid++; }
         public Bar(int id) { this.id = id; }
-        public String toString() {
+        @Override
+		public String toString() {
             return "Bar[" + this.id + "]";
         }
 
+		@Override
 		protected void finalize() throws Throwable {
 			super.finalize();
 		}
@@ -62,7 +68,8 @@ public class ReferenceMapTestCase {
     public void testReferences() throws Exception {
         
         ReferenceCache<Foo,Bar> map = new ReferenceCache<Foo,Bar>(ReferenceCache.Type.Weak, ReferenceCache.Type.Weak) {
-            protected Bar create(Foo key) {
+            @Override
+			protected Bar create(Foo key) {
             	return null;
             }
         };

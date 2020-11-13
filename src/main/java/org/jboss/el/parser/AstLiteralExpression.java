@@ -16,15 +16,18 @@ public final class AstLiteralExpression extends SimpleNode {
         super(id);
     }
 
-    public Class getType(EvaluationContext ctx) throws ELException {
+    @Override
+	public Class getType(EvaluationContext ctx) throws ELException {
         return String.class;
     }
 
-    public Object getValue(EvaluationContext ctx) throws ELException {
+    @Override
+	public Object getValue(EvaluationContext ctx) throws ELException {
         return this.image;
     }
 
-    public void setImage(String image) {
+    @Override
+	public void setImage(String image) {
         if (image.indexOf('\\') == -1) {
             this.image = image;
             return;

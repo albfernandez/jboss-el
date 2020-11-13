@@ -12,7 +12,8 @@ public class FunctionMapperImpl extends FunctionMapper {
     
     public FunctionMapperImpl() {}
     
-    public Method resolveFunction(String prefix, String localName) {
+    @Override
+	public Method resolveFunction(String prefix, String localName) {
         if (this.functions == null) return null;
         
         String key = prefix + ":" + localName;

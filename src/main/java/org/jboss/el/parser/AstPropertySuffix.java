@@ -18,17 +18,20 @@ public final class AstPropertySuffix extends ValueSuffixNode {
 		super(id);
 	}
 
+	@Override
 	public MethodInfo getMethodInfo(Object base, EvaluationContext ctx,
 			Class[] paramTypes) throws ELException {
 		return ReflectionUtil.getMethodInfo(base, this.image, paramTypes);
 	}
 
+	@Override
 	public Class getType(Object base, EvaluationContext ctx) throws ELException {
 		ELResolver resolver = ctx.getELResolver();
 		ctx.setPropertyResolved(false);
 		return resolver.getType(ctx, base, this.image);
 	}
 
+	@Override
 	public Object getTarget(Object base, EvaluationContext ctx)
 			throws ELException {
 		if (base == null) {
@@ -45,6 +48,7 @@ public final class AstPropertySuffix extends ValueSuffixNode {
 		return r;
 	}
 
+	@Override
 	public Object getValue(Object base, EvaluationContext ctx)
 			throws ELException {
 		if (base == null) {
@@ -55,12 +59,14 @@ public final class AstPropertySuffix extends ValueSuffixNode {
 		return resolver.getValue(ctx, base, this.image);
 	}
 
+	@Override
 	public Object invoke(Object base, EvaluationContext ctx,
 			Class[] paramTypes, Object[] paramValues) throws ELException {
 		return ReflectionUtil.invokeMethod(base, this.image, paramTypes,
 				paramValues);
 	}
 
+	@Override
 	public boolean isReadOnly(Object base, EvaluationContext ctx)
 			throws ELException {
 		ELResolver resolver = ctx.getELResolver();
@@ -68,6 +74,7 @@ public final class AstPropertySuffix extends ValueSuffixNode {
 		return resolver.isReadOnly(ctx, base, this.image);
 	}
 
+	@Override
 	public void setValue(Object base, EvaluationContext ctx, Object value)
 			throws ELException {
 		ELResolver resolver = ctx.getELResolver();

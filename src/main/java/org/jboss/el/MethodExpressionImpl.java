@@ -145,7 +145,8 @@ public final class MethodExpressionImpl extends MethodExpression implements
      * @see java.util.Hashtable
      * @see java.lang.Object#equals(java.lang.Object)
      */
-    public boolean equals(Object obj) {
+    @Override
+	public boolean equals(Object obj) {
         return (obj instanceof MethodExpressionImpl && obj.hashCode() == this
                 .hashCode());
     }
@@ -171,7 +172,8 @@ public final class MethodExpressionImpl extends MethodExpression implements
      * 
      * @see javax.el.Expression#getExpressionString()
      */
-    public String getExpressionString() {
+    @Override
+	public String getExpressionString() {
         return this.expr;
     }
 
@@ -197,7 +199,8 @@ public final class MethodExpressionImpl extends MethodExpression implements
      *             the cause property of this exception, if available.
      * @see javax.el.MethodExpression#getMethodInfo(javax.el.ELContext)
      */
-    public MethodInfo getMethodInfo(ELContext context)
+    @Override
+	public MethodInfo getMethodInfo(ELContext context)
             throws PropertyNotFoundException, MethodNotFoundException,
             ELException {
         Node n = this.getNode();
@@ -234,7 +237,8 @@ public final class MethodExpressionImpl extends MethodExpression implements
      * @see java.util.Hashtable
      * @see java.lang.Object#hashCode()
      */
-    public int hashCode() {
+    @Override
+	public int hashCode() {
         return this.expr.hashCode();
     }
 
@@ -268,7 +272,8 @@ public final class MethodExpressionImpl extends MethodExpression implements
      * @see javax.el.MethodExpression#invoke(javax.el.ELContext,
      *      java.lang.Object[])
      */
-    public Object invoke(ELContext context, Object[] params)
+    @Override
+	public Object invoke(ELContext context, Object[] params)
             throws PropertyNotFoundException, MethodNotFoundException,
             ELException {
         EvaluationContext ctx = new EvaluationContext(context, this.fnMapper,
@@ -281,7 +286,8 @@ public final class MethodExpressionImpl extends MethodExpression implements
      * 
      * @see java.io.Externalizable#readExternal(java.io.ObjectInput)
      */
-    public void readExternal(ObjectInput in) throws IOException,
+    @Override
+	public void readExternal(ObjectInput in) throws IOException,
             ClassNotFoundException {
         this.expr = in.readUTF();
         String type = in.readUTF();
@@ -299,7 +305,8 @@ public final class MethodExpressionImpl extends MethodExpression implements
      * 
      * @see java.io.Externalizable#writeExternal(java.io.ObjectOutput)
      */
-    public void writeExternal(ObjectOutput out) throws IOException {
+    @Override
+	public void writeExternal(ObjectOutput out) throws IOException {
         out.writeUTF(this.expr);
         out.writeUTF((this.expectedType != null) ? this.expectedType.getName()
                 : "");
@@ -308,7 +315,8 @@ public final class MethodExpressionImpl extends MethodExpression implements
         out.writeObject(this.varMapper);
     }
 
-    public boolean isLiteralText() {
+    @Override
+	public boolean isLiteralText() {
         return false;
     }
 }

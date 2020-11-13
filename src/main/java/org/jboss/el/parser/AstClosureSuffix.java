@@ -41,7 +41,8 @@ public final class AstClosureSuffix extends ValueSuffixNode {
         return toCollection(base, true);
     }
 
-     public boolean isReadOnly(Object base, EvaluationContext ctx) throws ELException {
+     @Override
+	public boolean isReadOnly(Object base, EvaluationContext ctx) throws ELException {
         Collection c = toCollection(base);
         if (c == null || c.isEmpty()) {
             return true;
@@ -52,7 +53,8 @@ public final class AstClosureSuffix extends ValueSuffixNode {
         }
     }
     
-    public Object getValue(Object base, EvaluationContext ctx) throws ELException {
+    @Override
+	public Object getValue(Object base, EvaluationContext ctx) throws ELException {
         Collection c = toCollection(base);
         if (c == null) {
             return null;
@@ -74,11 +76,13 @@ public final class AstClosureSuffix extends ValueSuffixNode {
         }
     }
     
-    public Class getType(Object base, EvaluationContext ctx) throws ELException {
+    @Override
+	public Class getType(Object base, EvaluationContext ctx) throws ELException {
         return Collection.class;
     }
     
-    public Object getTarget(Object base, EvaluationContext ctx) throws ELException {
+    @Override
+	public Object getTarget(Object base, EvaluationContext ctx) throws ELException {
         Collection c = toCollection(base);
         if (c == null || c.isEmpty()) {
             return null;
@@ -98,7 +102,8 @@ public final class AstClosureSuffix extends ValueSuffixNode {
         }
     }
     
-    public MethodInfo getMethodInfo(Object base, EvaluationContext ctx, Class[] paramTypes) throws ELException {
+    @Override
+	public MethodInfo getMethodInfo(Object base, EvaluationContext ctx, Class[] paramTypes) throws ELException {
         Collection c = toCollection(base);
         if (c == null || c.isEmpty()) {
             return null;
@@ -109,7 +114,8 @@ public final class AstClosureSuffix extends ValueSuffixNode {
         }
     }
     
-    public Object invoke(Object base, EvaluationContext ctx, Class[] paramTypes, Object[] paramValues) throws ELException {
+    @Override
+	public Object invoke(Object base, EvaluationContext ctx, Class[] paramTypes, Object[] paramValues) throws ELException {
         Collection c = toCollection(base);
         if (c == null) {
             return null;
@@ -131,7 +137,8 @@ public final class AstClosureSuffix extends ValueSuffixNode {
         }
     }
     
-    public void setValue(Object base, EvaluationContext ctx, Object value) throws ELException {
+    @Override
+	public void setValue(Object base, EvaluationContext ctx, Object value) throws ELException {
         Collection c = toCollection(base);
         if (c != null && !c.isEmpty()) {
             AstClosure closure = this.closure();

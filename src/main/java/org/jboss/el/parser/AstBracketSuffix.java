@@ -21,21 +21,25 @@ public final class AstBracketSuffix extends ValueSuffixNode {
         super(id);
     }
 
-    public Object getValue(EvaluationContext ctx)
+    @Override
+	public Object getValue(EvaluationContext ctx)
             throws ELException {
         return this.children[0].getValue(ctx);
     }
 
+	@Override
 	public MethodInfo getMethodInfo(Object base, EvaluationContext ctx, Class[] paramTypes) throws ELException {
 		return ReflectionUtil.getMethodInfo(base, this.getValue(ctx), paramTypes);
 	}
 
+	@Override
 	public Class getType(Object base, EvaluationContext ctx) throws ELException {
 		ELResolver resolver = ctx.getELResolver();
 		ctx.setPropertyResolved(false);
 		return resolver.getType(ctx, base, this.getValue(ctx));
 	}
 	
+	@Override
 	public Object getTarget(Object base, EvaluationContext ctx) throws ELException {
 		if (base == null) {
 			return null;
@@ -53,6 +57,7 @@ public final class AstBracketSuffix extends ValueSuffixNode {
 		return r;
 	}
 
+	@Override
 	public Object getValue(Object base, EvaluationContext ctx) throws ELException {
 		if (base == null) {
 			return null;
@@ -63,16 +68,19 @@ public final class AstBracketSuffix extends ValueSuffixNode {
 		return resolver.getValue(ctx, base, this.getValue(ctx));
 	}
 
+	@Override
 	public Object invoke(Object base, EvaluationContext ctx, Class[] paramTypes, Object[] paramValues) throws ELException {
 		return ReflectionUtil.invokeMethod(base, this.getValue(ctx), paramTypes, paramValues);
 	}
 
+	@Override
 	public boolean isReadOnly(Object base, EvaluationContext ctx) throws ELException {
 		ELResolver resolver = ctx.getELResolver();
 		ctx.setPropertyResolved(false);
 		return resolver.isReadOnly(ctx, base, this.getValue(ctx));
 	}
 
+	@Override
 	public void setValue(Object base, EvaluationContext ctx, Object value) throws ELException {
 		ELResolver resolver = ctx.getELResolver();
 		ctx.setPropertyResolved(false);

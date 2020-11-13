@@ -54,7 +54,8 @@ public final class ReflectionUtil {
     private static final Class[] NO_TYPES = new Class[0];
     
     private static ReferenceCache<Class, MethodCache> methodCache = new ReferenceCache<Class, MethodCache>(ReferenceCache.Type.Weak, ReferenceCache.Type.Soft) {
-        public MethodCache create(Class key) {
+        @Override
+		public MethodCache create(Class key) {
             return new MethodCache(key);
         }
     };
