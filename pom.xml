@@ -70,7 +70,7 @@
 						<manifestEntries>
 							<JBoss-EL-Version>${project.version}</JBoss-EL-Version>
 							<Specification-Version>1.0</Specification-Version>
-							<Automatic-Module-Name>${project.groupId}.${project.artifactId}</Automatic-Module-Name>
+							<Automatic-Module-Name>com.github.albfernandez.seam.el</Automatic-Module-Name>
 						</manifestEntries>
 					</archive>
 				</configuration>
