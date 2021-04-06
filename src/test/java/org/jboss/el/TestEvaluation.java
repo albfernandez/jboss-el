@@ -26,30 +26,23 @@ public class TestEvaluation {
     @Test
     public void testPerformance() throws Exception {
         ValueExpression ve = this.factory.createValueExpression(this.context, "#{company.departments.{x|x.employees.{x|x.lastName}}}", Object.class);
-        //Object ognl = Ognl.parseExpression("company.departments.{employees.{lastName}}");
         
         Map<String, Object> ctx = new HashMap<String, Object>();
         ctx.put("company", Example.createCompany());
         
         int runs = 10000;
         Object value = ve.getValue(this.context);
-        long now = System.currentTimeMillis();
+        long startNano = System.nanoTime();
         for (int i = 0; i < runs; i++) {
             value = ve.getValue(this.context);
         }
-        System.out.println("New [" + ((System.currentTimeMillis() - now)/((double) runs)) + "] " + value);
-        
-        //value = Ognl.getValue(ognl, ctx);
-        //now = System.currentTimeMillis();
-        //for (int i = 0; i < runs; i++) {
-        //    value = Ognl.getValue(ognl, ctx);
-        //}
-        System.out.println("Ognl [" + ((System.currentTimeMillis() - now)/((double) runs)) + "] " + value);
+        long endNano = System.nanoTime();
+        long totalMillis = (endNano - startNano) / 1000000L;
+        System.out.println("New [" + (totalMillis/(double) runs) + "] " + value);
     }
     @Test
     public void testSetters() throws Exception {
         for (int i = 0; i < 5; i++) {
-            //evalSetter("#{company.departments.{x|x.employees}.{x|x.lastName}}", "Hookom");
             evalSetter("#{company.departments.{x|x.employees.{x|x.lastName}}}", "Holden");
         }
     }
@@ -80,11 +73,13 @@ public class TestEvaluation {
         
         ValueExpression ve = this.factory.createValueExpression(this.context, expr, String.class);
         ve.getValue(this.context);
-        long now = System.currentTimeMillis();
+        long startNano = System.nanoTime();
         for (int i = 0; i < runs; i++) {
             ve.setValue(this.context, value);
         }
-        System.out.println("New [" + ((System.currentTimeMillis() - now)/((double) runs)) + "] " +  expr + " " + ve.getValue(this.context));
+        long endNano = System.nanoTime();
+        long usedMillis = (endNano - startNano) / 1000000L;
+        System.out.println("New [" + ( usedMillis/(double) runs) + "] " +  expr + " " + ve.getValue(this.context));
     }
     
     public void evalMethod(String expr) throws Exception {
@@ -96,11 +91,13 @@ public class TestEvaluation {
         
         MethodExpression me = this.factory.createMethodExpression(this.context, expr, String.class, types);
         Object out = me.invoke(this.context, args);
-        long now = System.currentTimeMillis();
+        long startNano = System.nanoTime();
         for (int i = 0; i < runs; i++) {
             out = me.invoke(this.context, args);
         }
-        System.out.println("New [" + ((System.currentTimeMillis() - now)/((double) runs)) + "] " +  expr + " " + out);
+        long endNano = System.nanoTime();
+        long usedMillis = (endNano - startNano) / 1000000L;
+        System.out.println("New [" + (usedMillis/(double) runs) + "] " +  expr + " " + out);
     }
     
     
@@ -109,17 +106,18 @@ public class TestEvaluation {
         
         ValueExpression ve = this.factory.createValueExpression(this.context, expr, Object.class);
         Object value = ve.getValue(this.context);
-        long now = System.currentTimeMillis();
+        long startNano = System.nanoTime();
         for (int i = 0; i < runs; i++) {
             value = ve.getValue(this.context);
         }
-        System.out.println("New [" + ((System.currentTimeMillis() - now)/((double) runs)) + "] " +  expr + " " + value);
+        long endNano = System.nanoTime();
+        long usedMillis = (endNano - startNano) / 1000000L;
+        System.out.println("New [" + (usedMillis /(double) runs) + "] " +  expr + " " + value);
     }
     
     @Before
     public void setUp() throws Exception {
         this.factory = new ExpressionFactoryImpl();
-        //this.sun = new com.sun.el.ExpressionFactoryImpl();
         this.context = new ELContextImpl();
         this.context.setVar("company", Example.createCompany());
         this.context.setVar("name", "Jacob");
