@@ -184,7 +184,7 @@ public final class ValueExpressionImpl extends ValueExpression implements
 	        return this.getNode().getType(ctx);
     	}
     	catch (Exception e) {
-    		throw new ELException("Error getting type for " + this.expr, e);
+    		throw new RuntimeException("Error getting type for " + this.expr, e);
     	}
     }
 
@@ -206,7 +206,7 @@ public final class ValueExpressionImpl extends ValueExpression implements
 	        return value;
     	}
     	catch (Exception e) {
-    		throw new ELException("Error getting value for " + this.expr, e);
+    		throw new RuntimeException("Error getting value for " + this.expr, e);
     	}
     }
 
@@ -275,7 +275,7 @@ public final class ValueExpressionImpl extends ValueExpression implements
 	        this.getNode().setValue(ctx, value);
     	}
     	catch (Exception e) {
-    		throw new ELException("Error setting value for " + this.expr, e);
+    		throw new RuntimeException("Error setting value for " + this.expr, e);
     	}
     }
 

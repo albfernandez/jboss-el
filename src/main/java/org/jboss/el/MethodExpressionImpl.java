@@ -203,10 +203,21 @@ public final class MethodExpressionImpl extends MethodExpression implements
 	public MethodInfo getMethodInfo(ELContext context)
             throws PropertyNotFoundException, MethodNotFoundException,
             ELException {
-        Node n = this.getNode();
-        EvaluationContext ctx = new EvaluationContext(context, this.fnMapper,
-                this.varMapper);
-        return n.getMethodInfo(ctx, this.paramTypes);
+    	try {
+	        Node n = this.getNode();
+	        EvaluationContext ctx = new EvaluationContext(context, this.fnMapper,
+	                this.varMapper);
+	        return n.getMethodInfo(ctx, this.paramTypes);
+    	}	    
+		catch (PropertyNotFoundException e) {
+			throw new PropertyNotFoundException("Error getting method info for: " + this.expr, e);
+		}
+		catch (MethodNotFoundException e) {
+			throw new MethodNotFoundException("Error getting method info for: " + this.expr, e);
+		}
+    	catch (Exception e) {
+    		throw new RuntimeException("Error getting method info for: " + this.expr, e);
+    	}
     }
 
     /**
@@ -276,9 +287,20 @@ public final class MethodExpressionImpl extends MethodExpression implements
 	public Object invoke(ELContext context, Object[] params)
             throws PropertyNotFoundException, MethodNotFoundException,
             ELException {
-        EvaluationContext ctx = new EvaluationContext(context, this.fnMapper,
-                this.varMapper);
-        return this.getNode().invoke(ctx, this.paramTypes, params);
+    	try {
+	        EvaluationContext ctx = new EvaluationContext(context, this.fnMapper,
+	                this.varMapper);
+	        return this.getNode().invoke(ctx, this.paramTypes, params);
+    	}
+    	catch (PropertyNotFoundException e) {
+    		throw new PropertyNotFoundException("Error calling invoke for: " + this.expr, e);
+    	}
+    	catch (MethodNotFoundException e) {
+    		throw new MethodNotFoundException("Error calling invoke for: " + this.expr, e);
+    	}
+    	catch (Exception e) {
+    		throw new RuntimeException("Error calling invoke for: " + this.expr, e);
+    	}
     }
 
     /*
