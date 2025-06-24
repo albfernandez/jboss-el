@@ -23,12 +23,12 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.concurrent.ConcurrentHashMap;
 
-import javax.el.ELContext;
-import javax.el.ELException;
-import javax.el.FunctionMapper;
-import javax.el.MethodExpression;
-import javax.el.ValueExpression;
-import javax.el.VariableMapper;
+import jakarta.el.ELContext;
+import jakarta.el.ELException;
+import jakarta.el.FunctionMapper;
+import jakarta.el.MethodExpression;
+import jakarta.el.ValueExpression;
+import jakarta.el.VariableMapper;
 
 import org.jboss.el.MethodExpressionImpl;
 import org.jboss.el.MethodExpressionLiteral;

@@ -1,6 +1,6 @@
 package org.jboss.el;
 
-import javax.el.ELContext;
+import jakarta.el.ELContext;
 
 public abstract class MethodResolver {
 	protected MethodResolver() {

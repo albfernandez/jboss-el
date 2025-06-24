@@ -17,7 +17,7 @@
 
 package org.jboss.el.parser;
 
-import javax.el.ELException;
+import jakarta.el.ELException;
 
 import org.jboss.el.lang.EvaluationContext;
 

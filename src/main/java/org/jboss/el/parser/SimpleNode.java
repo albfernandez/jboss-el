@@ -2,9 +2,9 @@
 
 package org.jboss.el.parser;
 
-import javax.el.ELException;
-import javax.el.MethodInfo;
-import javax.el.PropertyNotWritableException;
+import jakarta.el.ELException;
+import jakarta.el.MethodInfo;
+import jakarta.el.PropertyNotWritableException;
 
 import org.jboss.el.lang.ELSupport;
 import org.jboss.el.lang.EvaluationContext;

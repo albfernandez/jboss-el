@@ -2,10 +2,10 @@
 
 package org.jboss.el.parser;
 
-import javax.el.ELException;
-import javax.el.MethodInfo;
-import javax.el.ValueExpression;
-import javax.el.VariableMapper;
+import jakarta.el.ELException;
+import jakarta.el.MethodInfo;
+import jakarta.el.ValueExpression;
+import jakarta.el.VariableMapper;
 import org.jboss.el.ValueExpressionLiteral;
 import org.jboss.el.lang.EvaluationContext;
 

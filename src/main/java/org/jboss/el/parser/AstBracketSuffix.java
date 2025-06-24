@@ -2,10 +2,10 @@
 
 package org.jboss.el.parser;
 
-import javax.el.ELException;
-import javax.el.ELResolver;
-import javax.el.MethodInfo;
-import javax.el.PropertyNotFoundException;
+import jakarta.el.ELException;
+import jakarta.el.ELResolver;
+import jakarta.el.MethodInfo;
+import jakarta.el.PropertyNotFoundException;
 
 import org.jboss.el.lang.EvaluationContext;
 import org.jboss.el.util.MessageFactory;

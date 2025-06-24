@@ -3,9 +3,9 @@ package org.jboss.el;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.el.ExpressionFactory;
-import javax.el.MethodExpression;
-import javax.el.ValueExpression;
+import jakarta.el.ExpressionFactory;
+import jakarta.el.MethodExpression;
+import jakarta.el.ValueExpression;
 
 import org.jboss.el.beans.Example;
 import org.junit.jupiter.api.Test;

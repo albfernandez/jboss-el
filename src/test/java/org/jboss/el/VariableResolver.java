@@ -5,11 +5,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import javax.el.ELContext;
-import javax.el.ELException;
-import javax.el.ELResolver;
-import javax.el.PropertyNotFoundException;
-import javax.el.PropertyNotWritableException;
+import jakarta.el.ELContext;
+import jakarta.el.ELException;
+import jakarta.el.ELResolver;
+import jakarta.el.PropertyNotFoundException;
+import jakarta.el.PropertyNotWritableException;
 
 public class VariableResolver extends ELResolver {
 	

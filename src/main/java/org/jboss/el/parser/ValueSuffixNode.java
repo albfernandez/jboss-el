@@ -1,7 +1,7 @@
 package org.jboss.el.parser;
 
-import javax.el.ELException;
-import javax.el.MethodInfo;
+import jakarta.el.ELException;
+import jakarta.el.MethodInfo;
 
 import org.jboss.el.lang.EvaluationContext;
 

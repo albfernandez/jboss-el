@@ -4,21 +4,21 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.albfernandez</groupId>
 	<artifactId>jboss-el</artifactId>
-	<version>1.1.3-SNAPSHOT</version>
+	<version>10.0.1-SNAPSHOT</version>
 	<name>JBoss EL</name>
 	<description>JBoss EL is a extended EL implementation, distributed with Seam</description>
 	<packaging>jar</packaging>
 	<properties>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<maven.compiler.source>11</maven.compiler.source>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		
+
 		<junit.jupiter.version>5.13.1</junit.jupiter.version>
-	    <junit.platform.version>1.13.1</junit.platform.version>
-	    <maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
-	    <maven.failsafe.plugin.version>3.2.5</maven.failsafe.plugin.version>
+		<junit.platform.version>1.13.1</junit.platform.version>
+		<maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
+		<maven.failsafe.plugin.version>3.2.5</maven.failsafe.plugin.version>
 	</properties>
 
 	<url>https://github.com/albfernandez/jboss-el</url>
@@ -44,46 +44,46 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.jboss.spec.javax.el</groupId>
-			<artifactId>jboss-el-api_2.2_spec</artifactId>
-			<version>1.0.2.Final</version>
+			<groupId>jakarta.el</groupId>
+			<artifactId>jakarta.el-api</artifactId>
+			<version>5.0.1</version>
 		</dependency>
 		<dependency>
-	        <groupId>org.junit.jupiter</groupId>
-	        <artifactId>junit-jupiter-api</artifactId>
-	        <version>${junit.jupiter.version}</version>
-	        <scope>test</scope>
-	    </dependency>
-	    <dependency>
-	        <groupId>org.junit.jupiter</groupId>
-	        <artifactId>junit-jupiter-engine</artifactId>
-	        <version>${junit.jupiter.version}</version>
-	        <scope>test</scope>
-	    </dependency>
-	    <dependency>
-	        <groupId>org.junit.platform</groupId>
-	        <artifactId>junit-platform-launcher</artifactId>
-	        <version>${junit.platform.version}</version>
-	        <scope>test</scope>
-	    </dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit.jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>${junit.jupiter.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<version>${junit.platform.version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
-	            <groupId>org.apache.maven.plugins</groupId>
-	            <artifactId>maven-surefire-plugin</artifactId>
-	            <version>${maven.surefire.plugin.version}</version>
-	            <configuration>
-	                </configuration>
-	        </plugin>
-	        <plugin>
-	            <groupId>org.apache.maven.plugins</groupId>
-	            <artifactId>maven-failsafe-plugin</artifactId>
-	            <version>${maven.failsafe.plugin.version}</version>
-	            <configuration>
-	                </configuration>
-	        </plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven.surefire.plugin.version}</version>
+				<configuration>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>${maven.failsafe.plugin.version}</version>
+				<configuration>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -101,7 +101,8 @@
 						<manifestEntries>
 							<JBoss-EL-Version>${project.version}</JBoss-EL-Version>
 							<Specification-Version>1.0</Specification-Version>
-							<Automatic-Module-Name>com.github.albfernandez.seam.el</Automatic-Module-Name>
+							<Automatic-Module-Name>
+								com.github.albfernandez.seam.el</Automatic-Module-Name>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -160,15 +161,15 @@
 				</executions>
 			</plugin>
 			<plugin>
-	          <groupId>org.sonatype.central</groupId>
-	          <artifactId>central-publishing-maven-plugin</artifactId>
-	          <version>0.7.0</version>
-	          <extensions>true</extensions>
-	          <configuration>
-	            <publishingServerId>central</publishingServerId>
-	            <autoPublish>true</autoPublish>
-	          </configuration>
-	        </plugin>
+				<groupId>org.sonatype.central</groupId>
+				<artifactId>central-publishing-maven-plugin</artifactId>
+				<version>0.7.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<publishingServerId>central</publishingServerId>
+					<autoPublish>true</autoPublish>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>

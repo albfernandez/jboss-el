@@ -22,16 +22,16 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-import javax.el.ELContext;
-import javax.el.ELException;
-import javax.el.ELResolver;
-import javax.el.Expression;
-import javax.el.ExpressionFactory;
-import javax.el.FunctionMapper;
-import javax.el.PropertyNotFoundException;
-import javax.el.PropertyNotWritableException;
-import javax.el.ValueExpression;
-import javax.el.VariableMapper;
+import jakarta.el.ELContext;
+import jakarta.el.ELException;
+import jakarta.el.ELResolver;
+import jakarta.el.Expression;
+import jakarta.el.ExpressionFactory;
+import jakarta.el.FunctionMapper;
+import jakarta.el.PropertyNotFoundException;
+import jakarta.el.PropertyNotWritableException;
+import jakarta.el.ValueExpression;
+import jakarta.el.VariableMapper;
 
 import org.jboss.el.lang.ELSupport;
 import org.jboss.el.lang.EvaluationContext;
@@ -193,17 +193,18 @@ public final class ValueExpressionImpl extends ValueExpression implements
      * 
      * @see javax.el.ValueExpression#getValue(javax.el.ELContext)
      */
-    @Override
-	public Object getValue(ELContext context) throws PropertyNotFoundException,
+    @SuppressWarnings("unchecked")
+	@Override
+	public <T> T getValue(ELContext context) throws PropertyNotFoundException,
             ELException {
     	try {
 	        EvaluationContext ctx = new EvaluationContext(context, this.fnMapper,
 	                this.varMapper);
 	        Object value = this.getNode().getValue(ctx);
 	        if (this.expectedType != null) {
-	            return ELSupport.coerceToType(value, this.expectedType);
+	            return (T) ELSupport.coerceToType(value, this.expectedType);
 	        }
-	        return value;
+	        return (T) value;
     	}
     	catch (Exception e) {
     		throw new RuntimeException("Error getting value for " + this.expr, e);

@@ -4,10 +4,10 @@ package org.jboss.el.parser;
 
 import java.lang.reflect.Method;
 
-import javax.el.ELException;
-import javax.el.MethodInfo;
-import javax.el.PropertyNotFoundException;
-import javax.el.PropertyNotWritableException;
+import jakarta.el.ELException;
+import jakarta.el.MethodInfo;
+import jakarta.el.PropertyNotFoundException;
+import jakarta.el.PropertyNotWritableException;
 
 import org.jboss.el.lang.EvaluationContext;
 import org.jboss.el.util.MessageFactory;

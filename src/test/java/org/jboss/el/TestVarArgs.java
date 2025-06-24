@@ -12,7 +12,7 @@ package org.jboss.el;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-import javax.el.ValueExpression;
+import jakarta.el.ValueExpression;
 
 import org.jboss.el.beans.Security;
 import org.jboss.el.parser.ELParser;

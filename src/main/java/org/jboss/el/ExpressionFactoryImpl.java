@@ -17,10 +17,10 @@
 
 package org.jboss.el;
 
-import javax.el.ELContext;
-import javax.el.ExpressionFactory;
-import javax.el.MethodExpression;
-import javax.el.ValueExpression;
+import jakarta.el.ELContext;
+import jakarta.el.ExpressionFactory;
+import jakarta.el.MethodExpression;
+import jakarta.el.ValueExpression;
 
 import org.jboss.el.lang.ELSupport;
 import org.jboss.el.lang.ExpressionBuilder;
@@ -42,9 +42,10 @@ public class ExpressionFactoryImpl extends ExpressionFactory {
         super();
     }
 
-    @Override
-	public Object coerceToType(Object obj, Class<?> type) {
-        return ELSupport.coerceToType(obj, type);
+    @SuppressWarnings("unchecked")
+	@Override
+    public <T> T coerceToType(Object obj, Class<T> targetType) {
+        return (T) ELSupport.coerceToType(obj, targetType);
     }
 
     @Override

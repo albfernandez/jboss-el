@@ -1,8 +1,8 @@
 package org.jboss.el;
 
-import javax.el.ExpressionFactory;
-import javax.el.MethodExpression;
-import javax.el.PropertyNotFoundException;
+import jakarta.el.ExpressionFactory;
+import jakarta.el.MethodExpression;
+import jakarta.el.PropertyNotFoundException;
 
 import org.jboss.el.beans.Company;
 import org.jboss.el.lang.ExpressionBuilder;

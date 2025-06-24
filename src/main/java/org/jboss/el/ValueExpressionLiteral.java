@@ -19,13 +19,13 @@ package org.jboss.el;
 
 import java.io.Externalizable;
 import java.io.IOException;
-import javax.el.ELContext;
-import javax.el.PropertyNotWritableException;
+import jakarta.el.ELContext;
+import jakarta.el.PropertyNotWritableException;
 
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
-import javax.el.ValueExpression;
+import jakarta.el.ValueExpression;
 
 import org.jboss.el.lang.ELSupport;
 import org.jboss.el.util.MessageFactory;
@@ -51,12 +51,13 @@ public final class ValueExpressionLiteral extends ValueExpression implements
         this.expectedType = expectedType;
     }
 
-    @Override
-	public Object getValue(ELContext context) {
+    @SuppressWarnings("unchecked")
+	@Override
+	public <T> T getValue(ELContext context) {
         if (this.expectedType != null) {
-            return ELSupport.coerceToType(this.value, this.expectedType);
+            return (T) ELSupport.coerceToType(this.value, this.expectedType);
         }
-        return this.value;
+        return (T) this.value;
     }
 
     @Override
