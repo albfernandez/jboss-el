@@ -184,13 +184,13 @@ public class ELSupport {
     public final static Character coerceToCharacter(final Object obj)
             throws IllegalArgumentException {
         if (obj == null || "".equals(obj)) {
-            return new Character((char) 0);
+            return Character.valueOf((char) 0);
         }
         if (obj instanceof String) {
-            return new Character(((String) obj).charAt(0));
+            return Character.valueOf(((String) obj).charAt(0));
         }
         if (ELArithmetic.isNumber(obj)) {
-            return new Character((char) ((Number) obj).shortValue());
+            return Character.valueOf((char) ((Number) obj).shortValue());
         }
         Class<?> objType = obj.getClass();
         if (obj instanceof Character || objType == Character.TYPE) {
@@ -225,7 +225,7 @@ public class ELSupport {
             return Long.valueOf(number.longValue());
         }
         if (Double.TYPE == type || Double.class.equals(type)) {
-            return new Double(number.doubleValue());
+            return Double.valueOf(number.doubleValue());
         }
         if (Integer.TYPE == type || Integer.class.equals(type)) {
             return Integer.valueOf(number.intValue());
@@ -249,7 +249,7 @@ public class ELSupport {
             return Short.valueOf(number.shortValue());
         }
         if (Float.TYPE == type || Float.class.equals(type)) {
-            return new Float(number.floatValue());
+            return Float.valueOf(number.floatValue());
         }
 
         throw new IllegalArgumentException(MessageFactory.get("error.convert",
@@ -464,7 +464,7 @@ public class ELSupport {
             if (Double.parseDouble(value) > Double.MAX_VALUE) {
                 return new BigDecimal(value);
             } else {
-                return new Double(value);
+                return Double.valueOf(value);
             }
         } catch (NumberFormatException e0) {
             return new BigDecimal(value);
