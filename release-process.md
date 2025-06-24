@@ -4,12 +4,12 @@ This guide provides a chronological steps which goes through release tagging, st
 
 ## Check the SNAPSHOT builds and pass the tests
 
-Check that the project builds in java 8, java 11 and java 17
+Check that the project builds in java 11, 17 and 21
 
 ```bash
-mvn clean package install verify
 JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/ mvn clean package install verify
 JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/ mvn clean package install verify
+JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64/ mvn clean package install verify
 ```
 
 
@@ -18,7 +18,7 @@ JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/ mvn clean package install verify
 ```bash
 # change release in pom.xml
 mvn clean package install verify
-mvn clean deploy
+mvn clean deploy -Pdeploy
 git add -A
 git commit -S -m 'Release <1.1.1>'
 git tag -a <1.1.1.> -m "Tagging release <1.1.1>"
