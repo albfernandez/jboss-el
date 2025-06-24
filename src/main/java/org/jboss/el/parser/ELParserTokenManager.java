@@ -165,7 +165,7 @@ public class ELParserTokenManager implements ELParserConstants {
 			}
 			if (curChar < 64) {
 				long l = 1L << curChar;
-				MatchLoop: do {
+				do {
 					switch (jjstateSet[--i]) {
 					case 7:
 						if ((0xffffffe7ffffffffL & l) != 0L) {
@@ -236,7 +236,7 @@ public class ELParserTokenManager implements ELParserConstants {
 				} while (i != startsAt);
 			} else if (curChar < 128) {
 				long l = 1L << (curChar & 077);
-				MatchLoop: do {
+				do {
 					switch (jjstateSet[--i]) {
 					case 7:
 						if ((0xffffffffefffffffL & l) != 0L) {
@@ -291,7 +291,7 @@ public class ELParserTokenManager implements ELParserConstants {
 				long l1 = 1L << (hiByte & 077);
 				int i2 = (curChar & 0xff) >> 6;
 				long l2 = 1L << (curChar & 077);
-				MatchLoop: do {
+				do {
 					switch (jjstateSet[--i]) {
 					case 7:
 					case 0:
@@ -796,7 +796,7 @@ public class ELParserTokenManager implements ELParserConstants {
 			}
 			if (curChar < 64) {
 				long l = 1L << curChar;
-				MatchLoop: do {
+				do {
 					switch (jjstateSet[--i]) {
 					case 41:
 						if ((0x3ff001000000000L & l) != 0L) {
@@ -1091,7 +1091,7 @@ public class ELParserTokenManager implements ELParserConstants {
 				} while (i != startsAt);
 			} else if (curChar < 128) {
 				long l = 1L << (curChar & 077);
-				MatchLoop: do {
+				do {
 					switch (jjstateSet[--i]) {
 					case 41:
 						if ((0x7fffffe87fffffeL & l) != 0L) {
@@ -1259,7 +1259,7 @@ public class ELParserTokenManager implements ELParserConstants {
 				long l1 = 1L << (hiByte & 077);
 				int i2 = (curChar & 0xff) >> 6;
 				long l2 = 1L << (curChar & 077);
-				MatchLoop: do {
+				do {
 					switch (jjstateSet[--i]) {
 					case 41:
 						if (jjCanMove_1(hiByte, i1, i2, l1, l2)) {

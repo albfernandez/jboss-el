@@ -53,7 +53,8 @@ public final class AstClosureSuffix extends ValueSuffixNode {
         }
     }
     
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
 	public Object getValue(Object base, EvaluationContext ctx) throws ELException {
         Collection c = toCollection(base);
         if (c == null) {
@@ -62,7 +63,7 @@ public final class AstClosureSuffix extends ValueSuffixNode {
             return Collections.EMPTY_LIST;
         } else {
             Object v;
-            Collection r = new ClosureList(c.size());
+            Collection<Object> r = new ClosureList<>(c.size());
             AstClosure closure = this.closure();
             for (Object o : c) {
                 v = closure.getValue(o, ctx);
@@ -81,14 +82,15 @@ public final class AstClosureSuffix extends ValueSuffixNode {
         return Collection.class;
     }
     
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
 	public Object getTarget(Object base, EvaluationContext ctx) throws ELException {
         Collection c = toCollection(base);
         if (c == null || c.isEmpty()) {
             return null;
         } else {
             Object v;
-            Collection r = new ClosureList(c.size());
+            Collection<Object> r = new ClosureList<>(c.size());
             AstClosure closure = this.closure();
             for (Object o : c) {
                 v = closure.getValue(o, ctx);
@@ -114,7 +116,8 @@ public final class AstClosureSuffix extends ValueSuffixNode {
         }
     }
     
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
 	public Object invoke(Object base, EvaluationContext ctx, Class[] paramTypes, Object[] paramValues) throws ELException {
         Collection c = toCollection(base);
         if (c == null) {
@@ -123,7 +126,7 @@ public final class AstClosureSuffix extends ValueSuffixNode {
             return Collections.EMPTY_LIST;
         } else {
             Object v;
-            Collection r = new ClosureList(c.size());
+            Collection<Object> r = new ClosureList<>(c.size());
             AstClosure closure = this.closure();
             for (Object o : c) {
                 v = closure.invoke(o, ctx, paramTypes, paramValues);
@@ -148,7 +151,7 @@ public final class AstClosureSuffix extends ValueSuffixNode {
         }
     }
     
-    private static class ClosureList extends ArrayList {
+    private static class ClosureList<T> extends ArrayList<T> {
         private static final long serialVersionUID = 1L;
 
 		public ClosureList(int size) {

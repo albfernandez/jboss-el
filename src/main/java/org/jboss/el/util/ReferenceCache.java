@@ -269,7 +269,7 @@ public abstract class ReferenceCache<K,V> {
             if (value != null) {
             	return value;
             } else {
-                Callable<ReferenceValue<V>> call = new Callable() {
+                Callable<ReferenceValue<V>> call = new Callable<ReferenceValue<V>>() {
                     @Override
 					public ReferenceValue<V> call() throws Exception {
                         V created = create((K) key);
@@ -317,7 +317,7 @@ public abstract class ReferenceCache<K,V> {
     
     public V put(K key, final V value) {
         ReferenceKey refKey = this.keyFactory.createKey(this.queue, key);
-        Callable<ReferenceValue<V>> call = new Callable() {
+        Callable<ReferenceValue<V>> call = new Callable<ReferenceValue<V>>() {
             @Override
 			public ReferenceValue<V> call() throws Exception {
                 return valueFactory.createValue(queue, value);

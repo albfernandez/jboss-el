@@ -145,7 +145,7 @@ public final class ReflectionUtil {
         return (r >= 0) ? a : b;
     }
     
-    private static int matches(Class t, Class p) {
+    private static int matches(Class<?> t, Class<?> p) {
         if (t == p || t.equals(p)) {
             return 2;
         }
@@ -161,7 +161,8 @@ public final class ReflectionUtil {
         private final Method[] methods;
         private final Class type;
         private final Map<String,Object> cache;
-        public MethodCache(Class type) {
+        @SuppressWarnings("unchecked")
+		public MethodCache(Class type) {
             boolean isAnonymous = type.isAnonymousClass();
             boolean isPrivate = !Modifier.isPublic(type.getModifiers());
 
@@ -177,21 +178,23 @@ public final class ReflectionUtil {
                 if (c == null) {
                     this.cache.put(m.getName(), m);
                 } else if (c instanceof Method) {
-                    List l = new ArrayList(5);
+                    List<Object> l = new ArrayList<>(5);
                     l.add(m);
                     l.add(c);
                     this.cache.put(m.getName(), l);
-                } else {
+                } else if (c instanceof List){
                     ((List) c).add(m);
                 }
             }
         }
         
-        public Class getType() {
+        @SuppressWarnings("unused")
+		public Class getType() {
             return this.type;
         }
         
-        public Method findMethod(String name, Object[] in) {
+        @SuppressWarnings("unchecked")
+		public Method findMethod(String name, Object[] in) {
             Object o = this.cache.get(name);
             if (o == null) {
             	return null;

@@ -57,7 +57,8 @@ public class ELSupport {
      * @return     a negative integer, zero, or a positive integer as the first argument is less than, equal to, or greater than the second.
      * @throws ELException throws when invalid
      */
-    public final static int compare(final Object obj0, final Object obj1)
+    @SuppressWarnings("unchecked")
+	public final static int compare(final Object obj0, final Object obj1)
             throws ELException {
         if (obj0 == obj1 || equals(obj0, obj1)) {
             return 0;
@@ -147,7 +148,8 @@ public class ELSupport {
      * @param type the type to obtain.
      * @return the object converted to enum
      */
-    public final static Enum coerceToEnum(final Object obj, Class type) {
+    @SuppressWarnings("unchecked")
+	public final static Enum coerceToEnum(final Object obj, Class type) {
         if (obj == null || "".equals(obj)) {
             return null;
         }
