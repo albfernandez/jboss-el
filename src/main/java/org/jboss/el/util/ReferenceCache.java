@@ -134,7 +134,8 @@ public abstract class ReferenceCache<K,V> {
     	@Override
 		public ReferenceValue<V> createValue(final ReferenceQueue queue, final V value) {
             return new ReferenceValue<V>() {
-                private final SoftReference<V> ref = new SoftReference<V>(value, queue);
+                @SuppressWarnings("unchecked")
+				private final SoftReference<V> ref = new SoftReference<V>(value, queue);
                 @Override
 				public V get() {
                     return ref.get();
@@ -148,27 +149,28 @@ public abstract class ReferenceCache<K,V> {
         }
     }
     
-    public abstract class ReferenceKey<K> {
+    public abstract class ReferenceKey<M> {
         private final int hash;
         
-        public ReferenceKey(K key) {
+        public ReferenceKey(M key) {
             this.hash = key.hashCode();
         }
         
-        protected abstract K get();
+        protected abstract M get();
         
-        @Override
+        @SuppressWarnings("unchecked")
+		@Override
 		public boolean equals(Object obj) {
         	if (this == obj) {
         		return true;
         	}
-            K me = this.get();
+            M me = this.get();
             if (me != null) {
                 if (obj == me) {
                 	return true;
                 }
                 if (obj instanceof ReferenceKey) {
-                    K them = ((ReferenceKey<K>) obj).get();
+                    M them = ((ReferenceKey<M>) obj).get();
                     return me == them || me.equals(them);
                 }
             }
@@ -261,7 +263,8 @@ public abstract class ReferenceCache<K,V> {
     
     protected abstract V create(K key);
     
-    public V get(final Object key) {
+    @SuppressWarnings("unchecked")
+	public V get(final Object key) {
         try {
             ReferenceKey<K> refKey = this.lookupFactory.createKey(this.queue, key);
             Future<ReferenceValue<V>> f = this.cache.get(refKey);
@@ -270,7 +273,7 @@ public abstract class ReferenceCache<K,V> {
             	return value;
             } else {
                 Callable<ReferenceValue<V>> call = new Callable<ReferenceValue<V>>() {
-                    @Override
+					@Override
 					public ReferenceValue<V> call() throws Exception {
                         V created = create((K) key);
                         if (created != null) {
