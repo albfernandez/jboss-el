@@ -18,7 +18,7 @@ JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/ mvn clean package install verify
 ```bash
 # change release in pom.xml
 mvn clean package install verify
-mvn clean package install verify deploy
+mvn clean deploy
 git add -A
 git commit -S -m 'Release <1.1.1>'
 git tag -a <1.1.1.> -m "Tagging release <1.1.1>"

@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.github.albfernandez</groupId>
 	<artifactId>jboss-el</artifactId>
-	<version>1.1.2-SNAPSHOT</version>
+	<version>1.1.2</version>
 	<name>JBoss EL</name>
 	<description>JBoss EL is a extended EL implementation, distributed with Seam</description>
 	<packaging>jar</packaging>
@@ -19,8 +19,6 @@
 	    <junit.platform.version>1.13.1</junit.platform.version>
 	    <maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
 	    <maven.failsafe.plugin.version>3.2.5</maven.failsafe.plugin.version>
-		
-		
 	</properties>
 
 	<url>https://github.com/albfernandez/jboss-el</url>
@@ -35,6 +33,14 @@
 		<developerConnection>https://github.com/albfernandez/jboss-el</developerConnection>
 		<url>https://github.com/albfernandez/jboss-el</url>
 	</scm>
+	<developers>
+		<developer>
+			<name>Alberto Fernández</name>
+			<email>infjaf@gmail.com</email>
+			<organization>Alberto Fernández</organization>
+			<organizationUrl>https://github.com/albfernandez/</organizationUrl>
+		</developer>
+	</developers>
 
 	<dependencies>
 		<dependency>
