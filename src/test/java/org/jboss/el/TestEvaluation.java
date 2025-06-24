@@ -8,8 +8,8 @@ import javax.el.MethodExpression;
 import javax.el.ValueExpression;
 
 import org.jboss.el.beans.Example;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 public class TestEvaluation {
     
@@ -115,7 +115,7 @@ public class TestEvaluation {
         System.out.println("New [" + (usedMillis /(double) runs) + "] " +  expr + " " + value);
     }
     
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         this.factory = new ExpressionFactoryImpl();
         this.context = new ELContextImpl();

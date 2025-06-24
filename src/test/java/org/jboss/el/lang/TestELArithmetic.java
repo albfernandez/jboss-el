@@ -1,16 +1,21 @@
 package org.jboss.el.lang;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TestELArithmetic {
+	
+	public TestELArithmetic() {
+		super();
+	}
+	
     private <T> void assertCoerceToBigDecimalSame(Object val){
         Object coerced = ELArithmetic.BIGDECIMAL.coerce(val);
         assertEquals(val, coerced);
@@ -41,13 +46,14 @@ public class TestELArithmetic {
     @Test
     public void testCoerceLongToBigDecimal(){
         Number num = ELArithmetic.BIGDECIMAL.coerce((Object)5L);
-        assertTrue("should be an instanceof BigDecimal but is of class "+num.getClass(), num instanceof BigDecimal);
+        assertTrue(num instanceof BigDecimal, "should be an instanceof BigDecimal but is of class "+num.getClass());
         assertEquals(5L, num.longValue());
     }
 
     private void assertNumberType(Class<?> type){
-        if (!ELArithmetic.isNumberType(type))
+        if (!ELArithmetic.isNumberType(type)) {
             throw new AssertionError(type.getName()+" is number type but ELArithmetic missed it.");
+        }
     }
     // Tests for ELSupport.isNumberType
     @Test

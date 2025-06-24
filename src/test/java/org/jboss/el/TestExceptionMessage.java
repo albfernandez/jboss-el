@@ -6,8 +6,9 @@ import javax.el.PropertyNotFoundException;
 
 import org.jboss.el.beans.Company;
 import org.jboss.el.lang.ExpressionBuilder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 
 public class TestExceptionMessage {
 
@@ -18,12 +19,14 @@ public class TestExceptionMessage {
     	super();
     }
     
-    @Test(expected=PropertyNotFoundException.class)
+    @Test
     public void test1() {
-    	String expression = "#{company.president.firstName}";
-    	 MethodExpression me = this.factory.createMethodExpression(this.context, expression, String.class, new Class[0]);
-         Object out = me.invoke(this.context, new Object[]{});
-         System.out.println("out:" + out);
+    	Assertions.assertThrows(PropertyNotFoundException.class, () -> {
+	    	String expression = "#{company.president.firstName}";
+	    	 MethodExpression me = this.factory.createMethodExpression(this.context, expression, String.class, new Class[0]);
+	         Object out = me.invoke(this.context, new Object[]{});
+	         System.out.println("out:" + out);
+    	});
     }
     
     @Test
@@ -36,7 +39,7 @@ public class TestExceptionMessage {
          System.out.println("out:" + out);
     }
     
-	@Before
+	@BeforeEach
 	public void setUp() {
 		this.factory = new ExpressionFactoryImpl();
 		// this.sun = new com.sun.el.ExpressionFactoryImpl();

@@ -1,14 +1,18 @@
 package org.jboss.el.lang;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TestELSupport {
+	
+	public TestELSupport() {
+		super();
+	}
 
     // Tests for public final static Number coerceToNumber(final Object obj)
     @Test

@@ -17,7 +17,7 @@ import javax.el.ValueExpression;
 import org.jboss.el.beans.Security;
 import org.jboss.el.parser.ELParser;
 import org.jboss.el.parser.SimpleNode;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  *

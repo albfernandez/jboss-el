@@ -12,8 +12,8 @@ package org.jboss.el.util;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -92,7 +92,7 @@ public class ReferenceMapTestCase {
         }
 
         for (Foo f : keys) {
-            Assert.assertNotNull("Key not null " + f, map.get(f));
+            Assertions.assertNotNull(map.get(f), "Key not null " + f);
         }
 
         // comment and uncomment this line
@@ -108,7 +108,7 @@ public class ReferenceMapTestCase {
         }
 
         for (Foo f : keys) {
-            Assert.assertNull("Key null " + f, map.get(f));
+            Assertions.assertNull(map.get(f),"Key null " + f);
         }
     }
 }

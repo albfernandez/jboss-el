@@ -14,6 +14,13 @@
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		
+		<junit.jupiter.version>5.13.1</junit.jupiter.version>
+	    <junit.platform.version>1.13.1</junit.platform.version>
+	    <maven.surefire.plugin.version>3.2.5</maven.surefire.plugin.version>
+	    <maven.failsafe.plugin.version>3.2.5</maven.failsafe.plugin.version>
+		
+		
 	</properties>
 
 	<url>https://github.com/albfernandez/jboss-el</url>
@@ -28,13 +35,6 @@
 		<developerConnection>https://github.com/albfernandez/jboss-el</developerConnection>
 		<url>https://github.com/albfernandez/jboss-el</url>
 	</scm>
-	<developers>
-		<developer>
-			<id>manaRH</id>
-			<name>Marek Novotny</name>
-			<organization>Red Hat</organization>
-		</developer>
-	</developers>
 
 	<dependencies>
 		<dependency>
@@ -43,15 +43,41 @@
 			<version>1.0.2.Final</version>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.2</version>
-			<scope>test</scope>
-		</dependency>
+	        <groupId>org.junit.jupiter</groupId>
+	        <artifactId>junit-jupiter-api</artifactId>
+	        <version>${junit.jupiter.version}</version>
+	        <scope>test</scope>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.junit.jupiter</groupId>
+	        <artifactId>junit-jupiter-engine</artifactId>
+	        <version>${junit.jupiter.version}</version>
+	        <scope>test</scope>
+	    </dependency>
+	    <dependency>
+	        <groupId>org.junit.platform</groupId>
+	        <artifactId>junit-platform-launcher</artifactId>
+	        <version>${junit.platform.version}</version>
+	        <scope>test</scope>
+	    </dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
+			<plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-surefire-plugin</artifactId>
+	            <version>${maven.surefire.plugin.version}</version>
+	            <configuration>
+	                </configuration>
+	        </plugin>
+	        <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-failsafe-plugin</artifactId>
+	            <version>${maven.failsafe.plugin.version}</version>
+	            <configuration>
+	                </configuration>
+	        </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
